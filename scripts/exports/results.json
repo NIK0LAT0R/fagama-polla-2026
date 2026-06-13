@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "1",
+    "updatedAt": "2026-06-11T21:28:17.111Z"
+  },
+  {
+    "id": "2",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "2",
+    "updatedAt": "2026-06-12T03:59:22.822Z"
+  }
+]

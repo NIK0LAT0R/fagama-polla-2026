@@ -1,0 +1,75 @@
+:root {
+  --color-bg: #0b1f14;
+  --color-surface: #122a1c;
+  --color-surface-2: #1a3826;
+  --color-border: #2a5a3d;
+  --color-text: #edf7f0;
+  --color-muted: #9bc4a8;
+  --color-primary: #00c853;
+  --color-primary-dark: #00a844;
+  --color-gold: #ffd54f;
+  --color-silver: #cfd8dc;
+  --color-bronze: #cd7f32;
+  --color-danger: #ef5350;
+  --color-warning: #ffb74d;
+  --radius: 12px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  background:
+    radial-gradient(ellipse at top, #1a4d2e 0%, transparent 60%),
+    var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+select {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+}
+
+input:focus,
+select:focus,
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
