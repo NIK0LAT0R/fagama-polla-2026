@@ -3,10 +3,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { useAdmin } from '../../context/AdminContext.jsx';
 import { useApp } from '../../context/AppContext.jsx';
 import { calculateMatchPoints } from '../../services/scoring.js';
-import { getPredictionsByPlayer } from '../../services/firestore.js';
+import { fetchPredictionsByPlayer } from '../../services/cosmosApi.js';
 import { getPlayerImageSrc, getPlayerInitials } from '../../utils/playerImages.js';
 import { getTeamFlagSrc } from '../../utils/flags.js';
 import { STAGES } from '../../data/matches.js';
+
 
 function TeamFlag({ teamName }) {
   const [failed, setFailed] = useState(false);
