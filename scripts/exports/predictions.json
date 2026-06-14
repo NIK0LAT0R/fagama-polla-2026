@@ -256,6 +256,38 @@
     "updatedAt": "2026-06-12T02:28:41.553Z"
   },
   {
+    "id": "09cf204b-4ca5-403b-8a6a-4d774adc0ac3_25",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "25",
+    "playerId": "09cf204b-4ca5-403b-8a6a-4d774adc0ac3",
+    "updatedAt": "2026-06-13T02:58:02.120Z"
+  },
+  {
+    "id": "09cf204b-4ca5-403b-8a6a-4d774adc0ac3_26",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "26",
+    "playerId": "09cf204b-4ca5-403b-8a6a-4d774adc0ac3",
+    "updatedAt": "2026-06-13T03:04:23.374Z"
+  },
+  {
+    "id": "09cf204b-4ca5-403b-8a6a-4d774adc0ac3_31",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "31",
+    "playerId": "09cf204b-4ca5-403b-8a6a-4d774adc0ac3",
+    "updatedAt": "2026-06-13T03:04:23.308Z"
+  },
+  {
+    "id": "09cf204b-4ca5-403b-8a6a-4d774adc0ac3_32",
+    "scoreB": 2,
+    "scoreA": 2,
+    "matchId": "32",
+    "playerId": "09cf204b-4ca5-403b-8a6a-4d774adc0ac3",
+    "updatedAt": "2026-06-13T03:04:23.424Z"
+  },
+  {
     "id": "09cf204b-4ca5-403b-8a6a-4d774adc0ac3_7",
     "scoreB": 1,
     "scoreA": 2,
@@ -400,12 +432,108 @@
     "updatedAt": "2026-06-12T12:42:08.131Z"
   },
   {
+    "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_25",
+    "scoreB": 0,
+    "scoreA": 5,
+    "matchId": "25",
+    "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
+    "updatedAt": "2026-06-12T22:34:18.654Z"
+  },
+  {
+    "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_26",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "26",
+    "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
+    "updatedAt": "2026-06-12T22:34:44.733Z"
+  },
+  {
+    "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_31",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "31",
+    "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
+    "updatedAt": "2026-06-12T22:34:30.348Z"
+  },
+  {
+    "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_37",
+    "scoreB": 1,
+    "scoreA": 1,
+    "matchId": "37",
+    "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
+    "updatedAt": "2026-06-12T22:35:05.597Z"
+  },
+  {
+    "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_38",
+    "scoreB": 1,
+    "scoreA": 1,
+    "matchId": "38",
+    "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
+    "updatedAt": "2026-06-12T22:36:42.737Z"
+  },
+  {
     "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_4",
     "scoreB": 1,
     "scoreA": 1,
     "matchId": "4",
     "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
     "updatedAt": "2026-06-11T22:19:08.082Z"
+  },
+  {
+    "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_43",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "43",
+    "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
+    "updatedAt": "2026-06-12T22:35:20.534Z"
+  },
+  {
+    "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_44",
+    "scoreB": 0,
+    "scoreA": 3,
+    "matchId": "44",
+    "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
+    "updatedAt": "2026-06-12T22:34:57.933Z"
+  },
+  {
+    "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_49",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "49",
+    "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
+    "updatedAt": "2026-06-12T22:36:58.677Z"
+  },
+  {
+    "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_50",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "50",
+    "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
+    "updatedAt": "2026-06-12T22:38:24.242Z"
+  },
+  {
+    "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_55",
+    "scoreB": 0,
+    "scoreA": 3,
+    "matchId": "55",
+    "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
+    "updatedAt": "2026-06-12T22:38:33.546Z"
+  },
+  {
+    "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_56",
+    "scoreB": 0,
+    "scoreA": 0,
+    "matchId": "56",
+    "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
+    "updatedAt": "2026-06-12T22:38:48.987Z"
+  },
+  {
+    "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_62",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "62",
+    "playerId": "17ecaea8-f267-4cd6-b155-c44b43317b25",
+    "updatedAt": "2026-06-12T22:39:55.780Z"
   },
   {
     "id": "17ecaea8-f267-4cd6-b155-c44b43317b25_7",
@@ -680,6 +808,22 @@
     "updatedAt": "2026-06-10T04:11:25.629Z"
   },
   {
+    "id": "1_13",
+    "scoreB": 2,
+    "scoreA": 3,
+    "matchId": "13",
+    "playerId": "1",
+    "updatedAt": "2026-06-12T23:43:47.350Z"
+  },
+  {
+    "id": "1_14",
+    "scoreB": 1,
+    "scoreA": 0,
+    "matchId": "14",
+    "playerId": "1",
+    "updatedAt": "2026-06-12T23:43:57.584Z"
+  },
+  {
     "id": "1_19",
     "scoreB": 2,
     "scoreA": 2,
@@ -694,6 +838,14 @@
     "scoreB": 0,
     "scoreA": 1,
     "updatedAt": "2026-06-10T23:34:07.816Z"
+  },
+  {
+    "id": "1_20",
+    "scoreB": 2,
+    "scoreA": 2,
+    "matchId": "20",
+    "playerId": "1",
+    "updatedAt": "2026-06-12T23:44:11.433Z"
   },
   {
     "id": "1_3",
@@ -736,6 +888,14 @@
     "updatedAt": "2026-06-12T00:15:33.962Z"
   },
   {
+    "id": "1_8",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "8",
+    "playerId": "1",
+    "updatedAt": "2026-06-12T23:43:37.610Z"
+  },
+  {
     "id": "1b7f5454-533f-4ec1-9373-1d8acef61e8c_1",
     "scoreB": 1,
     "scoreA": 2,
@@ -768,12 +928,36 @@
     "updatedAt": "2026-06-11T03:50:56.616Z"
   },
   {
+    "id": "1b7f5454-533f-4ec1-9373-1d8acef61e8c_13",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "13",
+    "playerId": "1b7f5454-533f-4ec1-9373-1d8acef61e8c",
+    "updatedAt": "2026-06-12T19:25:09.413Z"
+  },
+  {
+    "id": "1b7f5454-533f-4ec1-9373-1d8acef61e8c_14",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "14",
+    "playerId": "1b7f5454-533f-4ec1-9373-1d8acef61e8c",
+    "updatedAt": "2026-06-12T19:25:09.556Z"
+  },
+  {
     "id": "1b7f5454-533f-4ec1-9373-1d8acef61e8c_2",
     "scoreB": 0,
     "scoreA": 2,
     "matchId": "2",
     "playerId": "1b7f5454-533f-4ec1-9373-1d8acef61e8c",
     "updatedAt": "2026-06-11T03:50:56.071Z"
+  },
+  {
+    "id": "1b7f5454-533f-4ec1-9373-1d8acef61e8c_20",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "20",
+    "playerId": "1b7f5454-533f-4ec1-9373-1d8acef61e8c",
+    "updatedAt": "2026-06-12T19:25:09.620Z"
   },
   {
     "id": "1b7f5454-533f-4ec1-9373-1d8acef61e8c_3",
@@ -968,6 +1152,22 @@
     "updatedAt": "2026-06-10T23:32:08.375Z"
   },
   {
+    "id": "25cd7398-e4f3-46c2-bd1a-188701610ed7_13",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "13",
+    "playerId": "25cd7398-e4f3-46c2-bd1a-188701610ed7",
+    "updatedAt": "2026-06-12T21:28:16.124Z"
+  },
+  {
+    "id": "25cd7398-e4f3-46c2-bd1a-188701610ed7_14",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "14",
+    "playerId": "25cd7398-e4f3-46c2-bd1a-188701610ed7",
+    "updatedAt": "2026-06-12T21:28:39.284Z"
+  },
+  {
     "id": "25cd7398-e4f3-46c2-bd1a-188701610ed7_19",
     "scoreB": 1,
     "scoreA": 2,
@@ -984,12 +1184,28 @@
     "updatedAt": "2026-06-10T23:32:08.443Z"
   },
   {
+    "id": "25cd7398-e4f3-46c2-bd1a-188701610ed7_20",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "20",
+    "playerId": "25cd7398-e4f3-46c2-bd1a-188701610ed7",
+    "updatedAt": "2026-06-12T21:29:22.975Z"
+  },
+  {
     "id": "25cd7398-e4f3-46c2-bd1a-188701610ed7_7",
     "scoreB": 3,
     "scoreA": 1,
     "matchId": "7",
     "playerId": "25cd7398-e4f3-46c2-bd1a-188701610ed7",
     "updatedAt": "2026-06-11T22:49:04.356Z"
+  },
+  {
+    "id": "25cd7398-e4f3-46c2-bd1a-188701610ed7_8",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "8",
+    "playerId": "25cd7398-e4f3-46c2-bd1a-188701610ed7",
+    "updatedAt": "2026-06-12T21:27:50.781Z"
   },
   {
     "id": "374a0c08-7f4f-4c62-b26c-fcacc9765254_10",
@@ -1320,6 +1536,22 @@
     "updatedAt": "2026-06-10T21:50:19.320Z"
   },
   {
+    "id": "37f41693-8091-426e-937b-f81348cdd9e4_13",
+    "scoreB": 2,
+    "scoreA": 3,
+    "matchId": "13",
+    "playerId": "37f41693-8091-426e-937b-f81348cdd9e4",
+    "updatedAt": "2026-06-12T22:44:11.927Z"
+  },
+  {
+    "id": "37f41693-8091-426e-937b-f81348cdd9e4_14",
+    "scoreB": 1,
+    "scoreA": 1,
+    "matchId": "14",
+    "playerId": "37f41693-8091-426e-937b-f81348cdd9e4",
+    "updatedAt": "2026-06-12T22:45:20.190Z"
+  },
+  {
     "id": "37f41693-8091-426e-937b-f81348cdd9e4_19",
     "scoreB": 3,
     "scoreA": 2,
@@ -1336,6 +1568,14 @@
     "updatedAt": "2026-06-10T21:50:19.402Z"
   },
   {
+    "id": "37f41693-8091-426e-937b-f81348cdd9e4_20",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "20",
+    "playerId": "37f41693-8091-426e-937b-f81348cdd9e4",
+    "updatedAt": "2026-06-12T22:45:38.093Z"
+  },
+  {
     "id": "37f41693-8091-426e-937b-f81348cdd9e4_7",
     "scoreB": 0,
     "scoreA": 1,
@@ -1344,12 +1584,36 @@
     "updatedAt": "2026-06-11T20:50:34.183Z"
   },
   {
+    "id": "37f41693-8091-426e-937b-f81348cdd9e4_8",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "8",
+    "playerId": "37f41693-8091-426e-937b-f81348cdd9e4",
+    "updatedAt": "2026-06-12T22:43:53.721Z"
+  },
+  {
     "id": "39e68d13-9400-4feb-8f85-80667cc9f96d_1",
     "scoreB": 0,
     "scoreA": 3,
     "matchId": "1",
     "playerId": "39e68d13-9400-4feb-8f85-80667cc9f96d",
     "updatedAt": "2026-06-11T01:08:47.999Z"
+  },
+  {
+    "id": "39e68d13-9400-4feb-8f85-80667cc9f96d_13",
+    "scoreB": 1,
+    "scoreA": 3,
+    "matchId": "13",
+    "playerId": "39e68d13-9400-4feb-8f85-80667cc9f96d",
+    "updatedAt": "2026-06-13T03:08:04.734Z"
+  },
+  {
+    "id": "39e68d13-9400-4feb-8f85-80667cc9f96d_14",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "14",
+    "playerId": "39e68d13-9400-4feb-8f85-80667cc9f96d",
+    "updatedAt": "2026-06-13T03:08:14.200Z"
   },
   {
     "id": "39e68d13-9400-4feb-8f85-80667cc9f96d_19",
@@ -1368,6 +1632,14 @@
     "updatedAt": "2026-06-11T01:09:27.759Z"
   },
   {
+    "id": "39e68d13-9400-4feb-8f85-80667cc9f96d_20",
+    "scoreB": 0,
+    "scoreA": 4,
+    "matchId": "20",
+    "playerId": "39e68d13-9400-4feb-8f85-80667cc9f96d",
+    "updatedAt": "2026-06-13T03:09:08.685Z"
+  },
+  {
     "id": "39e68d13-9400-4feb-8f85-80667cc9f96d_7",
     "scoreB": 0,
     "scoreA": 2,
@@ -1376,12 +1648,36 @@
     "updatedAt": "2026-06-12T02:59:36.241Z"
   },
   {
+    "id": "39e68d13-9400-4feb-8f85-80667cc9f96d_8",
+    "scoreB": 2,
+    "scoreA": 3,
+    "matchId": "8",
+    "playerId": "39e68d13-9400-4feb-8f85-80667cc9f96d",
+    "updatedAt": "2026-06-13T03:07:58.687Z"
+  },
+  {
     "id": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f_1",
     "scoreB": 1,
     "scoreA": 3,
     "matchId": "1",
     "playerId": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f",
     "updatedAt": "2026-06-10T23:43:06.077Z"
+  },
+  {
+    "id": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f_13",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "13",
+    "playerId": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f",
+    "updatedAt": "2026-06-13T00:04:18.295Z"
+  },
+  {
+    "id": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f_14",
+    "scoreB": 3,
+    "scoreA": 0,
+    "matchId": "14",
+    "playerId": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f",
+    "updatedAt": "2026-06-13T00:04:41.375Z"
   },
   {
     "id": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f_19",
@@ -1400,12 +1696,28 @@
     "updatedAt": "2026-06-10T23:43:06.144Z"
   },
   {
+    "id": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f_20",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "20",
+    "playerId": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f",
+    "updatedAt": "2026-06-13T00:05:13.526Z"
+  },
+  {
     "id": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f_7",
     "scoreB": 2,
     "scoreA": 0,
     "matchId": "7",
     "playerId": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f",
     "updatedAt": "2026-06-12T00:26:46.310Z"
+  },
+  {
+    "id": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f_8",
+    "scoreB": 4,
+    "scoreA": 0,
+    "matchId": "8",
+    "playerId": "3ad77c05-065f-4e52-bdbf-9b3e79aca62f",
+    "updatedAt": "2026-06-13T00:03:53.038Z"
   },
   {
     "id": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7_1",
@@ -1417,11 +1729,11 @@
   },
   {
     "id": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7_13",
-    "scoreB": 1,
-    "scoreA": 2,
     "matchId": "13",
     "playerId": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7",
-    "updatedAt": "2026-06-12T03:57:03.166Z"
+    "scoreB": 2,
+    "scoreA": 1,
+    "updatedAt": "2026-06-13T04:01:55.646Z"
   },
   {
     "id": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7_14",
@@ -1454,6 +1766,54 @@
     "matchId": "20",
     "playerId": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7",
     "updatedAt": "2026-06-12T01:47:12.856Z"
+  },
+  {
+    "id": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7_25",
+    "scoreB": 0,
+    "scoreA": 6,
+    "matchId": "25",
+    "playerId": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7",
+    "updatedAt": "2026-06-13T03:04:35.883Z"
+  },
+  {
+    "id": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7_26",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "26",
+    "playerId": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7",
+    "updatedAt": "2026-06-13T03:04:35.939Z"
+  },
+  {
+    "id": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7_32",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "32",
+    "playerId": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7",
+    "updatedAt": "2026-06-13T03:04:35.966Z"
+  },
+  {
+    "id": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7_37",
+    "scoreB": 0,
+    "scoreA": 3,
+    "matchId": "37",
+    "playerId": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7",
+    "updatedAt": "2026-06-13T03:04:36.080Z"
+  },
+  {
+    "id": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7_43",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "43",
+    "playerId": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7",
+    "updatedAt": "2026-06-13T03:04:36.146Z"
+  },
+  {
+    "id": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7_44",
+    "scoreB": 0,
+    "scoreA": 5,
+    "matchId": "44",
+    "playerId": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7",
+    "updatedAt": "2026-06-13T03:04:36.025Z"
   },
   {
     "id": "490f1ba9-41d2-49f8-88ce-c64b74baf2a7_7",
@@ -1489,11 +1849,11 @@
   },
   {
     "id": "49750a7c-5f1c-43df-b6f7-0db664064754_14",
-    "scoreB": 1,
     "scoreA": 0,
     "matchId": "14",
     "playerId": "49750a7c-5f1c-43df-b6f7-0db664064754",
-    "updatedAt": "2026-06-11T19:44:08.771Z"
+    "scoreB": 2,
+    "updatedAt": "2026-06-13T01:55:46.348Z"
   },
   {
     "id": "49750a7c-5f1c-43df-b6f7-0db664064754_19",
@@ -1712,6 +2072,38 @@
     "updatedAt": "2026-06-12T02:30:25.417Z"
   },
   {
+    "id": "4fe1c5d5-a2b2-4446-93c3-37d2723135d7_25",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "25",
+    "playerId": "4fe1c5d5-a2b2-4446-93c3-37d2723135d7",
+    "updatedAt": "2026-06-13T03:24:32.025Z"
+  },
+  {
+    "id": "4fe1c5d5-a2b2-4446-93c3-37d2723135d7_26",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "26",
+    "playerId": "4fe1c5d5-a2b2-4446-93c3-37d2723135d7",
+    "updatedAt": "2026-06-13T03:24:32.108Z"
+  },
+  {
+    "id": "4fe1c5d5-a2b2-4446-93c3-37d2723135d7_31",
+    "scoreB": 1,
+    "scoreA": 1,
+    "matchId": "31",
+    "playerId": "4fe1c5d5-a2b2-4446-93c3-37d2723135d7",
+    "updatedAt": "2026-06-13T03:24:32.075Z"
+  },
+  {
+    "id": "4fe1c5d5-a2b2-4446-93c3-37d2723135d7_32",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "32",
+    "playerId": "4fe1c5d5-a2b2-4446-93c3-37d2723135d7",
+    "updatedAt": "2026-06-13T03:24:32.153Z"
+  },
+  {
     "id": "4fe1c5d5-a2b2-4446-93c3-37d2723135d7_7",
     "scoreA": 2,
     "matchId": "7",
@@ -1736,6 +2128,22 @@
     "updatedAt": "2026-06-11T00:39:54.813Z"
   },
   {
+    "id": "56cd3858-bfab-4169-94b6-2e2566e741a0_13",
+    "scoreB": 2,
+    "scoreA": 3,
+    "matchId": "13",
+    "playerId": "56cd3858-bfab-4169-94b6-2e2566e741a0",
+    "updatedAt": "2026-06-13T01:11:22.712Z"
+  },
+  {
+    "id": "56cd3858-bfab-4169-94b6-2e2566e741a0_14",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "14",
+    "playerId": "56cd3858-bfab-4169-94b6-2e2566e741a0",
+    "updatedAt": "2026-06-13T01:11:51.168Z"
+  },
+  {
     "id": "56cd3858-bfab-4169-94b6-2e2566e741a0_19",
     "scoreB": 1,
     "scoreA": 2,
@@ -1752,12 +2160,28 @@
     "updatedAt": "2026-06-11T00:40:01.231Z"
   },
   {
+    "id": "56cd3858-bfab-4169-94b6-2e2566e741a0_20",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "20",
+    "playerId": "56cd3858-bfab-4169-94b6-2e2566e741a0",
+    "updatedAt": "2026-06-13T01:12:07.312Z"
+  },
+  {
     "id": "56cd3858-bfab-4169-94b6-2e2566e741a0_7",
     "scoreB": 1,
     "scoreA": 1,
     "matchId": "7",
     "playerId": "56cd3858-bfab-4169-94b6-2e2566e741a0",
     "updatedAt": "2026-06-11T22:47:19.527Z"
+  },
+  {
+    "id": "56cd3858-bfab-4169-94b6-2e2566e741a0_8",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "8",
+    "playerId": "56cd3858-bfab-4169-94b6-2e2566e741a0",
+    "updatedAt": "2026-06-13T01:10:51.383Z"
   },
   {
     "id": "6bde1135-1017-436e-9d03-91783ecb12ac_1",
@@ -1952,6 +2376,22 @@
     "updatedAt": "2026-06-11T14:04:59.521Z"
   },
   {
+    "id": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9_13",
+    "scoreB": 2,
+    "scoreA": 2,
+    "matchId": "13",
+    "playerId": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9",
+    "updatedAt": "2026-06-13T00:15:19.059Z"
+  },
+  {
+    "id": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9_14",
+    "scoreB": 4,
+    "scoreA": 0,
+    "matchId": "14",
+    "playerId": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9",
+    "updatedAt": "2026-06-13T00:15:36.566Z"
+  },
+  {
     "id": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9_19",
     "scoreB": 1,
     "scoreA": 3,
@@ -1960,12 +2400,52 @@
     "updatedAt": "2026-06-11T23:06:26.405Z"
   },
   {
+    "id": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9_20",
+    "scoreB": 1,
+    "scoreA": 0,
+    "matchId": "20",
+    "playerId": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9",
+    "updatedAt": "2026-06-13T00:15:56.415Z"
+  },
+  {
+    "id": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9_25",
+    "scoreB": 0,
+    "scoreA": 3,
+    "matchId": "25",
+    "playerId": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9",
+    "updatedAt": "2026-06-13T00:16:11.470Z"
+  },
+  {
+    "id": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9_31",
+    "scoreB": 3,
+    "scoreA": 2,
+    "matchId": "31",
+    "playerId": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9",
+    "updatedAt": "2026-06-13T00:16:27.213Z"
+  },
+  {
+    "id": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9_32",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "32",
+    "playerId": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9",
+    "updatedAt": "2026-06-13T00:16:44.994Z"
+  },
+  {
     "id": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9_7",
     "scoreB": 0,
     "scoreA": 1,
     "matchId": "7",
     "playerId": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9",
     "updatedAt": "2026-06-11T23:05:59.769Z"
+  },
+  {
+    "id": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9_8",
+    "scoreB": 1,
+    "scoreA": 0,
+    "matchId": "8",
+    "playerId": "76f0d304-bb07-4cf4-a517-3e8526f9a3d9",
+    "updatedAt": "2026-06-13T00:14:52.248Z"
   },
   {
     "id": "7jj9Khjq5lMhFcfROBWV",
@@ -1984,6 +2464,22 @@
     "updatedAt": "2026-06-10T22:34:16.552Z"
   },
   {
+    "id": "8729d9be-37e9-411b-9007-46eb8794ea89_13",
+    "scoreB": 2,
+    "scoreA": 3,
+    "matchId": "13",
+    "playerId": "8729d9be-37e9-411b-9007-46eb8794ea89",
+    "updatedAt": "2026-06-13T03:05:09.669Z"
+  },
+  {
+    "id": "8729d9be-37e9-411b-9007-46eb8794ea89_14",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "14",
+    "playerId": "8729d9be-37e9-411b-9007-46eb8794ea89",
+    "updatedAt": "2026-06-13T02:53:58.715Z"
+  },
+  {
     "id": "8729d9be-37e9-411b-9007-46eb8794ea89_19",
     "scoreB": 0,
     "scoreA": 1,
@@ -2000,6 +2496,14 @@
     "updatedAt": "2026-06-10T22:34:16.763Z"
   },
   {
+    "id": "8729d9be-37e9-411b-9007-46eb8794ea89_20",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "20",
+    "playerId": "8729d9be-37e9-411b-9007-46eb8794ea89",
+    "updatedAt": "2026-06-13T02:56:25.125Z"
+  },
+  {
     "id": "8729d9be-37e9-411b-9007-46eb8794ea89_7",
     "scoreB": 1,
     "scoreA": 2,
@@ -2008,12 +2512,36 @@
     "updatedAt": "2026-06-12T03:48:37.159Z"
   },
   {
+    "id": "8729d9be-37e9-411b-9007-46eb8794ea89_8",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "8",
+    "playerId": "8729d9be-37e9-411b-9007-46eb8794ea89",
+    "updatedAt": "2026-06-13T02:48:58.014Z"
+  },
+  {
     "id": "8f255d5e-7d5f-410b-b85d-24092909f917_1",
     "scoreB": 1,
     "scoreA": 2,
     "matchId": "1",
     "playerId": "8f255d5e-7d5f-410b-b85d-24092909f917",
     "updatedAt": "2026-06-11T01:12:04.828Z"
+  },
+  {
+    "id": "8f255d5e-7d5f-410b-b85d-24092909f917_13",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "13",
+    "playerId": "8f255d5e-7d5f-410b-b85d-24092909f917",
+    "updatedAt": "2026-06-13T01:47:58.283Z"
+  },
+  {
+    "id": "8f255d5e-7d5f-410b-b85d-24092909f917_14",
+    "scoreB": 1,
+    "scoreA": 0,
+    "matchId": "14",
+    "playerId": "8f255d5e-7d5f-410b-b85d-24092909f917",
+    "updatedAt": "2026-06-13T01:47:58.338Z"
   },
   {
     "id": "8f255d5e-7d5f-410b-b85d-24092909f917_19",
@@ -2032,6 +2560,14 @@
     "updatedAt": "2026-06-11T01:41:39.523Z"
   },
   {
+    "id": "8f255d5e-7d5f-410b-b85d-24092909f917_20",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "20",
+    "playerId": "8f255d5e-7d5f-410b-b85d-24092909f917",
+    "updatedAt": "2026-06-13T01:47:58.404Z"
+  },
+  {
     "id": "8f255d5e-7d5f-410b-b85d-24092909f917_7",
     "scoreB": 0,
     "scoreA": 1,
@@ -2040,12 +2576,36 @@
     "updatedAt": "2026-06-12T03:16:13.434Z"
   },
   {
+    "id": "8f255d5e-7d5f-410b-b85d-24092909f917_8",
+    "scoreB": 1,
+    "scoreA": 1,
+    "matchId": "8",
+    "playerId": "8f255d5e-7d5f-410b-b85d-24092909f917",
+    "updatedAt": "2026-06-13T01:47:58.222Z"
+  },
+  {
     "id": "9cfd1efe-42d1-45e1-a581-f7677478e6da_1",
     "scoreB": 0,
     "scoreA": 2,
     "matchId": "1",
     "playerId": "9cfd1efe-42d1-45e1-a581-f7677478e6da",
     "updatedAt": "2026-06-11T03:33:44.330Z"
+  },
+  {
+    "id": "9cfd1efe-42d1-45e1-a581-f7677478e6da_13",
+    "scoreB": 0,
+    "scoreA": 4,
+    "matchId": "13",
+    "playerId": "9cfd1efe-42d1-45e1-a581-f7677478e6da",
+    "updatedAt": "2026-06-13T02:32:39.811Z"
+  },
+  {
+    "id": "9cfd1efe-42d1-45e1-a581-f7677478e6da_14",
+    "scoreB": 0,
+    "scoreA": 1,
+    "matchId": "14",
+    "playerId": "9cfd1efe-42d1-45e1-a581-f7677478e6da",
+    "updatedAt": "2026-06-13T02:32:39.861Z"
   },
   {
     "id": "9cfd1efe-42d1-45e1-a581-f7677478e6da_19",
@@ -2064,6 +2624,14 @@
     "updatedAt": "2026-06-11T03:33:44.390Z"
   },
   {
+    "id": "9cfd1efe-42d1-45e1-a581-f7677478e6da_20",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "20",
+    "playerId": "9cfd1efe-42d1-45e1-a581-f7677478e6da",
+    "updatedAt": "2026-06-13T02:32:39.918Z"
+  },
+  {
     "id": "9cfd1efe-42d1-45e1-a581-f7677478e6da_7",
     "matchId": "7",
     "playerId": "9cfd1efe-42d1-45e1-a581-f7677478e6da",
@@ -2073,11 +2641,11 @@
   },
   {
     "id": "9cfd1efe-42d1-45e1-a581-f7677478e6da_8",
-    "scoreB": 1,
-    "scoreA": 0,
     "matchId": "8",
     "playerId": "9cfd1efe-42d1-45e1-a581-f7677478e6da",
-    "updatedAt": "2026-06-11T04:15:04.522Z"
+    "scoreB": 2,
+    "scoreA": 1,
+    "updatedAt": "2026-06-13T02:32:39.974Z"
   },
   {
     "id": "BofPLWis1kcmPSWDTPms",
@@ -2096,6 +2664,14 @@
     "updatedAt": "2026-06-10T05:01:01.000Z"
   },
   {
+    "id": "KELpOVzsSoh0HszrTqO4",
+    "playerId": "d220328d-6196-4a71-a1ba-020f00ced9b6",
+    "matchId": "7",
+    "scoreA": 3,
+    "scoreB": 1,
+    "updatedAt": "2026-06-11T05:01:01.000Z"
+  },
+  {
     "id": "VthOSXzMHNEAj2mvp2Si",
     "playerId": "374a0c08-7f4f-4c62-b26c-fcacc9765254",
     "matchId": "2",
@@ -2110,6 +2686,22 @@
     "matchId": "1",
     "playerId": "ac16c0f2-f680-484f-890b-4cf4924c06f4",
     "updatedAt": "2026-06-11T00:47:46.208Z"
+  },
+  {
+    "id": "ac16c0f2-f680-484f-890b-4cf4924c06f4_13",
+    "scoreB": 1,
+    "scoreA": 3,
+    "matchId": "13",
+    "playerId": "ac16c0f2-f680-484f-890b-4cf4924c06f4",
+    "updatedAt": "2026-06-13T02:07:36.703Z"
+  },
+  {
+    "id": "ac16c0f2-f680-484f-890b-4cf4924c06f4_14",
+    "scoreB": 3,
+    "scoreA": 0,
+    "matchId": "14",
+    "playerId": "ac16c0f2-f680-484f-890b-4cf4924c06f4",
+    "updatedAt": "2026-06-13T02:15:45.443Z"
   },
   {
     "id": "ac16c0f2-f680-484f-890b-4cf4924c06f4_19",
@@ -2134,6 +2726,14 @@
     "matchId": "7",
     "playerId": "ac16c0f2-f680-484f-890b-4cf4924c06f4",
     "updatedAt": "2026-06-12T02:10:55.402Z"
+  },
+  {
+    "id": "ac16c0f2-f680-484f-890b-4cf4924c06f4_8",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "8",
+    "playerId": "ac16c0f2-f680-484f-890b-4cf4924c06f4",
+    "updatedAt": "2026-06-13T02:07:12.576Z"
   },
   {
     "id": "ae4a40db-c76b-42cd-aa77-cc7ca7a22ff4_1",
@@ -2208,6 +2808,22 @@
     "updatedAt": "2026-06-10T22:20:17.829Z"
   },
   {
+    "id": "ba4ffcef-e738-41e6-bcaf-a58013f88502_13",
+    "scoreB": 1,
+    "scoreA": 3,
+    "matchId": "13",
+    "playerId": "ba4ffcef-e738-41e6-bcaf-a58013f88502",
+    "updatedAt": "2026-06-12T23:35:48.669Z"
+  },
+  {
+    "id": "ba4ffcef-e738-41e6-bcaf-a58013f88502_14",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "14",
+    "playerId": "ba4ffcef-e738-41e6-bcaf-a58013f88502",
+    "updatedAt": "2026-06-12T23:35:48.727Z"
+  },
+  {
     "id": "ba4ffcef-e738-41e6-bcaf-a58013f88502_19",
     "scoreB": 1,
     "scoreA": 1,
@@ -2224,12 +2840,28 @@
     "updatedAt": "2026-06-10T22:20:17.888Z"
   },
   {
+    "id": "ba4ffcef-e738-41e6-bcaf-a58013f88502_20",
+    "scoreB": 1,
+    "scoreA": 1,
+    "matchId": "20",
+    "playerId": "ba4ffcef-e738-41e6-bcaf-a58013f88502",
+    "updatedAt": "2026-06-12T23:35:48.780Z"
+  },
+  {
     "id": "ba4ffcef-e738-41e6-bcaf-a58013f88502_7",
     "scoreB": 1,
     "scoreA": 0,
     "matchId": "7",
     "playerId": "ba4ffcef-e738-41e6-bcaf-a58013f88502",
     "updatedAt": "2026-06-11T23:48:01.652Z"
+  },
+  {
+    "id": "ba4ffcef-e738-41e6-bcaf-a58013f88502_8",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "8",
+    "playerId": "ba4ffcef-e738-41e6-bcaf-a58013f88502",
+    "updatedAt": "2026-06-12T23:32:19.627Z"
   },
   {
     "id": "be48d4dc-e09d-4639-bc2b-ea0dc64d8d09_1",
@@ -2304,6 +2936,22 @@
     "updatedAt": "2026-06-10T23:15:35.373Z"
   },
   {
+    "id": "c5d76dd3-fe51-44ac-b9af-8aa047ee6152_13",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "13",
+    "playerId": "c5d76dd3-fe51-44ac-b9af-8aa047ee6152",
+    "updatedAt": "2026-06-12T23:45:39.773Z"
+  },
+  {
+    "id": "c5d76dd3-fe51-44ac-b9af-8aa047ee6152_14",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "14",
+    "playerId": "c5d76dd3-fe51-44ac-b9af-8aa047ee6152",
+    "updatedAt": "2026-06-12T23:45:39.821Z"
+  },
+  {
     "id": "c5d76dd3-fe51-44ac-b9af-8aa047ee6152_19",
     "scoreB": 2,
     "scoreA": 1,
@@ -2320,6 +2968,14 @@
     "updatedAt": "2026-06-10T23:15:35.428Z"
   },
   {
+    "id": "c5d76dd3-fe51-44ac-b9af-8aa047ee6152_20",
+    "scoreB": 1,
+    "scoreA": 0,
+    "matchId": "20",
+    "playerId": "c5d76dd3-fe51-44ac-b9af-8aa047ee6152",
+    "updatedAt": "2026-06-12T23:45:39.845Z"
+  },
+  {
     "id": "c5d76dd3-fe51-44ac-b9af-8aa047ee6152_7",
     "scoreB": 0,
     "scoreA": 2,
@@ -2328,12 +2984,36 @@
     "updatedAt": "2026-06-12T00:42:12.185Z"
   },
   {
+    "id": "c5d76dd3-fe51-44ac-b9af-8aa047ee6152_8",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "8",
+    "playerId": "c5d76dd3-fe51-44ac-b9af-8aa047ee6152",
+    "updatedAt": "2026-06-12T23:45:39.722Z"
+  },
+  {
     "id": "c65a87d7-c75e-4939-ba99-38dab1b2f504_1",
     "scoreA": 2,
     "matchId": "1",
     "playerId": "c65a87d7-c75e-4939-ba99-38dab1b2f504",
     "scoreB": 1,
     "updatedAt": "2026-06-10T03:17:11.368Z"
+  },
+  {
+    "id": "c65a87d7-c75e-4939-ba99-38dab1b2f504_13",
+    "scoreB": 2,
+    "scoreA": 2,
+    "matchId": "13",
+    "playerId": "c65a87d7-c75e-4939-ba99-38dab1b2f504",
+    "updatedAt": "2026-06-13T04:38:53.594Z"
+  },
+  {
+    "id": "c65a87d7-c75e-4939-ba99-38dab1b2f504_14",
+    "scoreB": 3,
+    "scoreA": 0,
+    "matchId": "14",
+    "playerId": "c65a87d7-c75e-4939-ba99-38dab1b2f504",
+    "updatedAt": "2026-06-13T04:39:27.320Z"
   },
   {
     "id": "c65a87d7-c75e-4939-ba99-38dab1b2f504_19",
@@ -2376,6 +3056,22 @@
     "updatedAt": "2026-06-10T22:17:56.848Z"
   },
   {
+    "id": "c71eb666-d675-462f-9db0-bb68515e5b4b_13",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "13",
+    "playerId": "c71eb666-d675-462f-9db0-bb68515e5b4b",
+    "updatedAt": "2026-06-12T23:41:06.364Z"
+  },
+  {
+    "id": "c71eb666-d675-462f-9db0-bb68515e5b4b_14",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "14",
+    "playerId": "c71eb666-d675-462f-9db0-bb68515e5b4b",
+    "updatedAt": "2026-06-12T23:41:06.437Z"
+  },
+  {
     "id": "c71eb666-d675-462f-9db0-bb68515e5b4b_19",
     "matchId": "19",
     "playerId": "c71eb666-d675-462f-9db0-bb68515e5b4b",
@@ -2392,12 +3088,28 @@
     "updatedAt": "2026-06-10T22:21:12.818Z"
   },
   {
+    "id": "c71eb666-d675-462f-9db0-bb68515e5b4b_20",
+    "scoreB": 1,
+    "scoreA": 0,
+    "matchId": "20",
+    "playerId": "c71eb666-d675-462f-9db0-bb68515e5b4b",
+    "updatedAt": "2026-06-12T23:41:06.500Z"
+  },
+  {
     "id": "c71eb666-d675-462f-9db0-bb68515e5b4b_7",
     "scoreB": 0,
     "scoreA": 1,
     "matchId": "7",
     "playerId": "c71eb666-d675-462f-9db0-bb68515e5b4b",
     "updatedAt": "2026-06-11T23:43:02.628Z"
+  },
+  {
+    "id": "c71eb666-d675-462f-9db0-bb68515e5b4b_8",
+    "scoreB": 3,
+    "scoreA": 0,
+    "matchId": "8",
+    "playerId": "c71eb666-d675-462f-9db0-bb68515e5b4b",
+    "updatedAt": "2026-06-12T23:41:06.310Z"
   },
   {
     "id": "cuwetXX07ZmEHkufOf0r",
@@ -2520,6 +3232,22 @@
     "updatedAt": "2026-06-11T00:49:58.518Z"
   },
   {
+    "id": "d2b2d9b0-9426-4028-aa6a-7a5f1853873f_13",
+    "matchId": "13",
+    "playerId": "d2b2d9b0-9426-4028-aa6a-7a5f1853873f",
+    "scoreB": 1,
+    "scoreA": 2,
+    "updatedAt": "2026-06-13T04:10:06.348Z"
+  },
+  {
+    "id": "d2b2d9b0-9426-4028-aa6a-7a5f1853873f_14",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "14",
+    "playerId": "d2b2d9b0-9426-4028-aa6a-7a5f1853873f",
+    "updatedAt": "2026-06-13T03:07:01.820Z"
+  },
+  {
     "id": "d2b2d9b0-9426-4028-aa6a-7a5f1853873f_19",
     "scoreB": 0,
     "scoreA": 2,
@@ -2536,6 +3264,14 @@
     "updatedAt": "2026-06-11T00:49:58.584Z"
   },
   {
+    "id": "d2b2d9b0-9426-4028-aa6a-7a5f1853873f_20",
+    "scoreB": 2,
+    "matchId": "20",
+    "playerId": "d2b2d9b0-9426-4028-aa6a-7a5f1853873f",
+    "scoreA": 1,
+    "updatedAt": "2026-06-13T04:10:41.909Z"
+  },
+  {
     "id": "d2b2d9b0-9426-4028-aa6a-7a5f1853873f_7",
     "scoreB": 1,
     "scoreA": 1,
@@ -2544,12 +3280,36 @@
     "updatedAt": "2026-06-12T01:45:51.998Z"
   },
   {
+    "id": "d2b2d9b0-9426-4028-aa6a-7a5f1853873f_8",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "8",
+    "playerId": "d2b2d9b0-9426-4028-aa6a-7a5f1853873f",
+    "updatedAt": "2026-06-13T03:07:01.709Z"
+  },
+  {
     "id": "d7edd48e-2637-4f0a-b2de-ad11729a14de_1",
     "scoreB": 0,
     "scoreA": 1,
     "matchId": "1",
     "playerId": "d7edd48e-2637-4f0a-b2de-ad11729a14de",
     "updatedAt": "2026-06-10T22:58:25.531Z"
+  },
+  {
+    "id": "d7edd48e-2637-4f0a-b2de-ad11729a14de_13",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "13",
+    "playerId": "d7edd48e-2637-4f0a-b2de-ad11729a14de",
+    "updatedAt": "2026-06-12T22:31:31.577Z"
+  },
+  {
+    "id": "d7edd48e-2637-4f0a-b2de-ad11729a14de_14",
+    "scoreB": 1,
+    "scoreA": 1,
+    "matchId": "14",
+    "playerId": "d7edd48e-2637-4f0a-b2de-ad11729a14de",
+    "updatedAt": "2026-06-12T22:34:16.131Z"
   },
   {
     "id": "d7edd48e-2637-4f0a-b2de-ad11729a14de_19",
@@ -2568,12 +3328,36 @@
     "updatedAt": "2026-06-10T22:58:35.603Z"
   },
   {
+    "id": "d7edd48e-2637-4f0a-b2de-ad11729a14de_20",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "20",
+    "playerId": "d7edd48e-2637-4f0a-b2de-ad11729a14de",
+    "updatedAt": "2026-06-12T22:35:20.952Z"
+  },
+  {
+    "id": "d7edd48e-2637-4f0a-b2de-ad11729a14de_31",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "31",
+    "playerId": "d7edd48e-2637-4f0a-b2de-ad11729a14de",
+    "updatedAt": "2026-06-12T22:30:29.304Z"
+  },
+  {
     "id": "d7edd48e-2637-4f0a-b2de-ad11729a14de_7",
     "scoreB": 2,
     "scoreA": 1,
     "matchId": "7",
     "playerId": "d7edd48e-2637-4f0a-b2de-ad11729a14de",
     "updatedAt": "2026-06-12T01:52:56.076Z"
+  },
+  {
+    "id": "d7edd48e-2637-4f0a-b2de-ad11729a14de_8",
+    "scoreA": 0,
+    "matchId": "8",
+    "playerId": "d7edd48e-2637-4f0a-b2de-ad11729a14de",
+    "scoreB": 2,
+    "updatedAt": "2026-06-13T02:43:12.003Z"
   },
   {
     "id": "e4d8ac1f-613c-4dd2-9e35-04dfb689041d_1",
@@ -2610,10 +3394,10 @@
   {
     "id": "e4d8ac1f-613c-4dd2-9e35-04dfb689041d_13",
     "scoreB": 1,
-    "scoreA": 1,
     "matchId": "13",
     "playerId": "e4d8ac1f-613c-4dd2-9e35-04dfb689041d",
-    "updatedAt": "2026-06-12T01:14:47.409Z"
+    "scoreA": 2,
+    "updatedAt": "2026-06-13T03:20:59.286Z"
   },
   {
     "id": "e4d8ac1f-613c-4dd2-9e35-04dfb689041d_14",
@@ -3200,6 +3984,22 @@
     "updatedAt": "2026-06-12T13:42:26.298Z"
   },
   {
+    "id": "e60f9981-5406-440a-aaf7-27d49366619d_25",
+    "scoreB": 0,
+    "scoreA": 4,
+    "matchId": "25",
+    "playerId": "e60f9981-5406-440a-aaf7-27d49366619d",
+    "updatedAt": "2026-06-13T00:18:22.276Z"
+  },
+  {
+    "id": "e60f9981-5406-440a-aaf7-27d49366619d_31",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "31",
+    "playerId": "e60f9981-5406-440a-aaf7-27d49366619d",
+    "updatedAt": "2026-06-13T00:18:22.327Z"
+  },
+  {
     "id": "e60f9981-5406-440a-aaf7-27d49366619d_7",
     "scoreB": 1,
     "scoreA": 2,
@@ -3224,6 +4024,22 @@
     "updatedAt": "2026-06-10T22:43:15.184Z"
   },
   {
+    "id": "e8dc0ef9-8458-494c-8508-24281ed824fb_13",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "13",
+    "playerId": "e8dc0ef9-8458-494c-8508-24281ed824fb",
+    "updatedAt": "2026-06-12T21:24:03.530Z"
+  },
+  {
+    "id": "e8dc0ef9-8458-494c-8508-24281ed824fb_14",
+    "scoreB": 2,
+    "matchId": "14",
+    "playerId": "e8dc0ef9-8458-494c-8508-24281ed824fb",
+    "scoreA": 1,
+    "updatedAt": "2026-06-13T04:32:58.288Z"
+  },
+  {
     "id": "e8dc0ef9-8458-494c-8508-24281ed824fb_19",
     "scoreB": 0,
     "scoreA": 1,
@@ -3240,12 +4056,28 @@
     "updatedAt": "2026-06-10T22:43:15.249Z"
   },
   {
+    "id": "e8dc0ef9-8458-494c-8508-24281ed824fb_20",
+    "matchId": "20",
+    "playerId": "e8dc0ef9-8458-494c-8508-24281ed824fb",
+    "scoreB": 1,
+    "scoreA": 0,
+    "updatedAt": "2026-06-13T04:30:46.285Z"
+  },
+  {
     "id": "e8dc0ef9-8458-494c-8508-24281ed824fb_7",
     "scoreB": 0,
     "scoreA": 1,
     "matchId": "7",
     "playerId": "e8dc0ef9-8458-494c-8508-24281ed824fb",
     "updatedAt": "2026-06-12T01:34:15.240Z"
+  },
+  {
+    "id": "e8dc0ef9-8458-494c-8508-24281ed824fb_8",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "8",
+    "playerId": "e8dc0ef9-8458-494c-8508-24281ed824fb",
+    "updatedAt": "2026-06-12T21:15:00.375Z"
   },
   {
     "id": "ea99b8e3-5f77-43d8-9ef4-e8cadd095f64_1",
@@ -3344,6 +4176,54 @@
     "updatedAt": "2026-06-11T20:35:43.949Z"
   },
   {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_13",
+    "scoreB": 0,
+    "scoreA": 1,
+    "matchId": "13",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T04:53:06.755Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_14",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "14",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T04:53:17.369Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_15",
+    "scoreB": 0,
+    "scoreA": 3,
+    "matchId": "15",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.129Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_16",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "16",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.074Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_17",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "17",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.156Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_18",
+    "scoreB": 2,
+    "scoreA": 3,
+    "matchId": "18",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.223Z"
+  },
+  {
     "id": "f225ee47-2017-4f87-accc-fe5815b2d082_19",
     "scoreB": 2,
     "scoreA": 1,
@@ -3400,12 +4280,124 @@
     "updatedAt": "2026-06-11T20:35:44.189Z"
   },
   {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_25",
+    "scoreB": 0,
+    "scoreA": 5,
+    "matchId": "25",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.249Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_26",
+    "scoreB": 1,
+    "scoreA": 1,
+    "matchId": "26",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.319Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_27",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "27",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.370Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_28",
+    "scoreB": 1,
+    "scoreA": 3,
+    "matchId": "28",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.457Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_29",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "29",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.511Z"
+  },
+  {
     "id": "f225ee47-2017-4f87-accc-fe5815b2d082_3",
     "scoreB": 1,
     "scoreA": 2,
     "matchId": "3",
     "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
     "updatedAt": "2026-06-11T20:35:43.533Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_30",
+    "scoreB": 3,
+    "scoreA": 0,
+    "matchId": "30",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.537Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_31",
+    "scoreB": 2,
+    "scoreA": 2,
+    "matchId": "31",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.563Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_32",
+    "scoreB": 2,
+    "scoreA": 2,
+    "matchId": "32",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.611Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_33",
+    "scoreB": 0,
+    "scoreA": 1,
+    "matchId": "33",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.637Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_34",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "34",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.697Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_35",
+    "scoreB": 2,
+    "scoreA": 2,
+    "matchId": "35",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.723Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_36",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "36",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.749Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_38",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "38",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:41.042Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_39",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "39",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:41.073Z"
   },
   {
     "id": "f225ee47-2017-4f87-accc-fe5815b2d082_4",
@@ -3416,12 +4408,172 @@
     "updatedAt": "2026-06-11T20:35:43.480Z"
   },
   {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_40",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "40",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:41.121Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_41",
+    "scoreB": 0,
+    "scoreA": 0,
+    "matchId": "41",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:41.146Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_42",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "42",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:41.191Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_43",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "43",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.801Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_44",
+    "scoreB": 0,
+    "scoreA": 4,
+    "matchId": "44",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.775Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_45",
+    "scoreB": 1,
+    "scoreA": 3,
+    "matchId": "45",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.855Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_46",
+    "scoreB": 2,
+    "scoreA": 2,
+    "matchId": "46",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.882Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_47",
+    "scoreB": 2,
+    "scoreA": 2,
+    "matchId": "47",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.934Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_48",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "48",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:40.986Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_49",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "49",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:41.217Z"
+  },
+  {
     "id": "f225ee47-2017-4f87-accc-fe5815b2d082_5",
     "scoreB": 2,
     "scoreA": 1,
     "matchId": "5",
     "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
     "updatedAt": "2026-06-11T20:35:43.594Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_50",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "50",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:41.265Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_51",
+    "scoreB": 1,
+    "scoreA": 3,
+    "matchId": "51",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:41.316Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_52",
+    "scoreB": 2,
+    "scoreA": 2,
+    "matchId": "52",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:41.367Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_53",
+    "scoreB": 3,
+    "scoreA": 2,
+    "matchId": "53",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:41.417Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_54",
+    "scoreB": 0,
+    "scoreA": 1,
+    "matchId": "54",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:35:41.466Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_55",
+    "scoreB": 2,
+    "scoreA": 2,
+    "matchId": "55",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:19.777Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_56",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "56",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:19.833Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_57",
+    "scoreB": 3,
+    "scoreA": 2,
+    "matchId": "57",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:19.859Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_58",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "58",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:19.888Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_59",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "59",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:19.941Z"
   },
   {
     "id": "f225ee47-2017-4f87-accc-fe5815b2d082_6",
@@ -3432,12 +4584,116 @@
     "updatedAt": "2026-06-11T20:35:43.661Z"
   },
   {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_60",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "60",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:19.990Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_61",
+    "scoreB": 1,
+    "scoreA": 3,
+    "matchId": "61",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:20.017Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_62",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "62",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:20.044Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_63",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "63",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:20.071Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_64",
+    "scoreB": 1,
+    "scoreA": 2,
+    "matchId": "64",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:20.098Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_65",
+    "scoreB": 1,
+    "scoreA": 1,
+    "matchId": "65",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:20.129Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_66",
+    "scoreB": 3,
+    "scoreA": 2,
+    "matchId": "66",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:20.182Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_67",
+    "scoreB": 2,
+    "scoreA": 3,
+    "matchId": "67",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:20.257Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_68",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "68",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:20.231Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_69",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "69",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:20.286Z"
+  },
+  {
     "id": "f225ee47-2017-4f87-accc-fe5815b2d082_7",
     "scoreB": 0,
     "scoreA": 2,
     "matchId": "7",
     "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
     "updatedAt": "2026-06-11T20:35:43.692Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_70",
+    "scoreB": 3,
+    "scoreA": 1,
+    "matchId": "70",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:20.346Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_71",
+    "scoreB": 4,
+    "scoreA": 2,
+    "matchId": "71",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:20.510Z"
+  },
+  {
+    "id": "f225ee47-2017-4f87-accc-fe5815b2d082_72",
+    "scoreB": 0,
+    "scoreA": 1,
+    "matchId": "72",
+    "playerId": "f225ee47-2017-4f87-accc-fe5815b2d082",
+    "updatedAt": "2026-06-13T16:44:20.561Z"
   },
   {
     "id": "f225ee47-2017-4f87-accc-fe5815b2d082_8",
@@ -3464,6 +4720,22 @@
     "updatedAt": "2026-06-11T02:33:18.555Z"
   },
   {
+    "id": "f2a9851b-940d-417b-b51c-a283f3096152_13",
+    "scoreA": 2,
+    "matchId": "13",
+    "playerId": "f2a9851b-940d-417b-b51c-a283f3096152",
+    "scoreB": 0,
+    "updatedAt": "2026-06-13T02:49:00.872Z"
+  },
+  {
+    "id": "f2a9851b-940d-417b-b51c-a283f3096152_14",
+    "scoreA": 1,
+    "matchId": "14",
+    "playerId": "f2a9851b-940d-417b-b51c-a283f3096152",
+    "scoreB": 3,
+    "updatedAt": "2026-06-13T02:52:05.377Z"
+  },
+  {
     "id": "f2a9851b-940d-417b-b51c-a283f3096152_19",
     "scoreB": 2,
     "scoreA": 1,
@@ -3480,12 +4752,28 @@
     "updatedAt": "2026-06-11T02:33:52.590Z"
   },
   {
+    "id": "f2a9851b-940d-417b-b51c-a283f3096152_20",
+    "matchId": "20",
+    "playerId": "f2a9851b-940d-417b-b51c-a283f3096152",
+    "scoreB": 2,
+    "scoreA": 1,
+    "updatedAt": "2026-06-13T02:52:05.433Z"
+  },
+  {
     "id": "f2a9851b-940d-417b-b51c-a283f3096152_7",
     "matchId": "7",
     "playerId": "f2a9851b-940d-417b-b51c-a283f3096152",
     "scoreB": 1,
     "scoreA": 1,
     "updatedAt": "2026-06-12T02:15:21.199Z"
+  },
+  {
+    "id": "f2a9851b-940d-417b-b51c-a283f3096152_8",
+    "matchId": "8",
+    "playerId": "f2a9851b-940d-417b-b51c-a283f3096152",
+    "scoreB": 2,
+    "scoreA": 0,
+    "updatedAt": "2026-06-13T02:48:09.592Z"
   },
   {
     "id": "f59041a0-272f-46ac-abb5-170691511b05_1",
@@ -3600,6 +4888,14 @@
     "updatedAt": "2026-06-12T00:49:29.769Z"
   },
   {
+    "id": "f59041a0-272f-46ac-abb5-170691511b05_62",
+    "scoreB": 2,
+    "scoreA": 1,
+    "matchId": "62",
+    "playerId": "f59041a0-272f-46ac-abb5-170691511b05",
+    "updatedAt": "2026-06-13T14:04:09.442Z"
+  },
+  {
     "id": "f59041a0-272f-46ac-abb5-170691511b05_7",
     "scoreB": 1,
     "scoreA": 1,
@@ -3688,6 +4984,22 @@
     "updatedAt": "2026-06-10T22:49:11.734Z"
   },
   {
+    "id": "fbc21b46-f924-4c3b-8079-634ee392c926_13",
+    "scoreB": 0,
+    "scoreA": 2,
+    "matchId": "13",
+    "playerId": "fbc21b46-f924-4c3b-8079-634ee392c926",
+    "updatedAt": "2026-06-12T22:36:09.882Z"
+  },
+  {
+    "id": "fbc21b46-f924-4c3b-8079-634ee392c926_14",
+    "scoreB": 2,
+    "scoreA": 0,
+    "matchId": "14",
+    "playerId": "fbc21b46-f924-4c3b-8079-634ee392c926",
+    "updatedAt": "2026-06-12T22:36:09.909Z"
+  },
+  {
     "id": "fbc21b46-f924-4c3b-8079-634ee392c926_19",
     "scoreB": 2,
     "scoreA": 3,
@@ -3704,12 +5016,28 @@
     "updatedAt": "2026-06-10T22:49:11.802Z"
   },
   {
+    "id": "fbc21b46-f924-4c3b-8079-634ee392c926_20",
+    "scoreB": 2,
+    "matchId": "20",
+    "playerId": "fbc21b46-f924-4c3b-8079-634ee392c926",
+    "scoreA": 1,
+    "updatedAt": "2026-06-13T03:20:22.227Z"
+  },
+  {
     "id": "fbc21b46-f924-4c3b-8079-634ee392c926_7",
     "scoreB": 1,
     "scoreA": 1,
     "matchId": "7",
     "playerId": "fbc21b46-f924-4c3b-8079-634ee392c926",
     "updatedAt": "2026-06-11T20:46:59.069Z"
+  },
+  {
+    "id": "fbc21b46-f924-4c3b-8079-634ee392c926_8",
+    "scoreB": 2,
+    "scoreA": 2,
+    "matchId": "8",
+    "playerId": "fbc21b46-f924-4c3b-8079-634ee392c926",
+    "updatedAt": "2026-06-12T22:36:09.829Z"
   },
   {
     "id": "mQrzPuoN9o2Tj6J0PAaF",
@@ -3726,5 +5054,21 @@
     "scoreA": 1,
     "scoreB": 1,
     "updatedAt": "2026-06-10T05:01:01.000Z"
+  },
+  {
+    "id": "qnXqL5lnXdwVbLZsokl7",
+    "playerId": "1b7f5454-533f-4ec1-9373-1d8acef61e8c",
+    "matchId": "19",
+    "scoreA": 2,
+    "scoreB": 1,
+    "updatedAt": "2026-06-11T05:01:01.000Z"
+  },
+  {
+    "id": "ym8DIXcMnWLQAWMR3nCI",
+    "playerId": "d220328d-6196-4a71-a1ba-020f00ced9b6",
+    "matchId": "19",
+    "scoreA": 3,
+    "scoreB": 2,
+    "updatedAt": "2026-06-11T05:01:01.000Z"
   }
 ]

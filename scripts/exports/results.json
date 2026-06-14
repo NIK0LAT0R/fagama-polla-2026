@@ -7,10 +7,24 @@
     "updatedAt": "2026-06-11T21:28:17.111Z"
   },
   {
+    "id": "19",
+    "scoreB": 1,
+    "scoreA": 4,
+    "matchId": "19",
+    "updatedAt": "2026-06-13T05:05:11.621Z"
+  },
+  {
     "id": "2",
     "scoreB": 1,
     "scoreA": 2,
     "matchId": "2",
     "updatedAt": "2026-06-12T03:59:22.822Z"
+  },
+  {
+    "id": "7",
+    "scoreB": 1,
+    "scoreA": 1,
+    "matchId": "7",
+    "updatedAt": "2026-06-12T21:00:31.392Z"
   }
 ]

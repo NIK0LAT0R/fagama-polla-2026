@@ -1,5 +1,5 @@
 
-const API_BASE = 'http://localhost:3001';
+const API_BASE = '/.netlify/functions/api';
 
 async function apiGet(path) {
   const response = await fetch(`${API_BASE}${path}`);
