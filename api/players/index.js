@@ -6,7 +6,7 @@ module.exports = async function () {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify([
-      { ok: true, source: 'azure-functions' }
+      { ok: true, source: 'azure-functions-minimal' }
     ])
   };
 };
