@@ -15,9 +15,9 @@ async function apiPost(path, body) {
   const response = await fetch(`${API_BASE}${path}`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify(body)
   });
 
   if (!response.ok) {
@@ -31,7 +31,7 @@ async function apiPost(path, body) {
 
 async function apiDelete(path) {
   const response = await fetch(`${API_BASE}${path}`, {
-    method: 'DELETE',
+    method: 'DELETE'
   });
 
   if (!response.ok) {
@@ -60,7 +60,7 @@ export async function claimPlayerInCosmos({ playerId, claimCode, uid, force = fa
     playerId,
     claimCode,
     uid,
-    force,
+    force
   });
 }
 
