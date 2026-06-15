@@ -1,42 +1,36 @@
-
 const { CosmosClient } = require('@azure/cosmos');
 
-function response(statusCode, data) {
-  return {
-    statusCode,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  };
-}
+const client = new CosmosClient({
+  endpoint: process.env.COSMOS_ENDPOINT,
+  key: process.env.COSMOS_KEY
+});
 
-exports.handler = async () => {
+const database = client.database('fagama-db');
+const container = database.container('players');
+
+exports.handler = async (event) => {
   try {
-    const endpoint = process.env.COSMOS_ENDPOINT;
-    const key = process.env.COSMOS_KEY;
+    const path = event.path.replace('/.netlify/functions/api', '');
 
-    if (!endpoint) {
-      return response(500, { error: 'COSMOS_ENDPOINT missing' });
+    // 👉 GET /players
+    if (event.httpMethod === 'GET' && path === '/players') {
+      const { resources } = await container.items.readAll().fetchAll();
+
+      return {
+        statusCode: 200,
+        body: JSON.stringify(resources)
+      };
     }
 
-    if (!key) {
-      return response(500, { error: 'COSMOS_KEY missing' });
-    }
+    return {
+      statusCode: 404,
+      body: JSON.stringify({ error: 'Route not found' })
+    };
 
-    const client = new CosmosClient({ endpoint, key });
-    const database = client.database('fagama-polla');
-    const container = database.container('players');
-
-    const { resources } = await container.items.readAll().fetchAll();
-
-    return response(200, {
-      ok: true,
-      endpointPreview: endpoint,
-      playersCount: resources.length,
-    });
   } catch (error) {
-    return response(500, {
-      error: 'Cosmos test failed',
-      details: error.message,
-    });
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message })
+    };
   }
 };
