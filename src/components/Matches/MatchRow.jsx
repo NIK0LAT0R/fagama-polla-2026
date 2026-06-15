@@ -45,7 +45,7 @@ function MatchRow({
   playerId,
   onDraftChange,
 }) {
-  const locked = false;
+  const locked = isMatchLocked(match);
   const [countdown, setCountdown] = useState(() => formatCountdown(match.lockAt));
 
   useEffect(() => {

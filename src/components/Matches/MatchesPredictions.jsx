@@ -7,16 +7,13 @@ import MatchRow from './MatchRow.jsx';
 
 function sortMatchesByCountdown(matchList) {
   const now = Date.now();
-  const FORCE_UNLOCK = true;
 
   return [...matchList].sort((a, b) => {
     const aLock = new Date(a.lockAt ?? a.datetime).getTime();
     const bLock = new Date(b.lockAt ?? b.datetime).getTime();
 
-    
-    const aLocked = false;
-    const bLocked = false;
-
+    const aLocked = aLock <= now;
+    const bLocked = bLock <= now;
 
     // Primero los NO bloqueados
     if (aLocked !== bLocked) {

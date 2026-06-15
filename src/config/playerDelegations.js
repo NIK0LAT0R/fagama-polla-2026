@@ -10,11 +10,10 @@
 
 export const PLAYER_DELEGATIONS_BY_NAME = {
   'Amanda Gamboa': ['Amanda Gamboa', 'Nestor Gamboa', 'Aura C'],
-  'Karen Navarro': ['Karen Navarro', 'Dinara Gamboa', 'Heidy Gamboa', 'Julio Padilla', 'Leonardo Padilla', 'Valentina Acero', 'Juan Rosero', 'Julian Gutierrez', 'Mateo Gamboa', 'Carolina Pinilla', 'Santiago Galeano', 'Emiliee'],
-  'Nicolas Gamboa': ['Nicolas Gamboa', 'Tochi', 'Sonia Rodriguez'],
+  'Nicolas Gamboa': ['Nicolas Gamboa', 'Tochi', 'Leonardo Baez'],
   'Sonia Rodriguez': ['Sonia Rodriguez', 'Alejandro Gamboa', 'Luciana Gamboa'],
   'Nestor Gamboa': ['Nestor Gamboa', 'Heidy Gamboa'],
-  'Leonardo Padilla': ['Leonardo Padilla', 'Bianca Padilla', 'Sebastian Borda', 'Leonardo Baez', 'Patricia Candamil', 'Luciana Gamboa', 'Alejandro Gamboa', 'Sandra Moreno', 'Diana Serrano' ],
+  'Leonardo Padilla': ['Leonardo Padilla', 'Bianca Padilla'],
   'Valentina Acero': ['Valentina Acero', 'Linda Patarroyo', 'Sandra Acero']
 
 };

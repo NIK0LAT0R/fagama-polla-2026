@@ -2,13 +2,25 @@
  * Returns true when the match kickoff time has passed (predictions locked).
  */
 
-export function isMatchLocked(matchOrDatetime) {
-  if (typeof matchOrDatetime === 'object' && matchOrDatetime?.lockAt) {
-    return Date.now() >= new Date(matchOrDatetime.lockAt).getTime();
+
+
+
+export function isMatchLocked(match) {
+  if (!match) return false;
+
+  const now = Date.now();
+
+  // Usa datetime si no hay lockAt
+  const lockSource = match.lockAt || match.datetime;
+
+  const lockTime = new Date(lockSource).getTime();
+
+  if (isNaN(lockTime)) {
+    console.warn("⚠️ fecha inválida en match:", match);
+    return false;
   }
 
-  // fallback por compatibilidad si aún le pasas datetime viejo
-  return Date.now() >= new Date(matchOrDatetime).getTime();
+  return lockTime <= now;
 }
 
 
