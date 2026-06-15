@@ -205,6 +205,27 @@ exports.handler = async (event) => {
       return response(200, { success: true });
     }
 
+// =========================
+    // GET /health
+    // =========================
+    if (method === 'GET' && path === '/health') {
+      return response(200, {
+        ok: true,
+        version: '2026-06-14-netlify-final',
+        routes: [
+          '/players',
+          '/claim-player',
+          '/results',
+          '/predictions/:playerId',
+          '/predictions-all',
+          '/predictions',
+          '/results (POST)',
+          '/results/:matchId (DELETE)'
+        ],
+        database: 'fagama-polla'
+      });
+    }
+
     // =========================
     // NOT FOUND
     // =========================
