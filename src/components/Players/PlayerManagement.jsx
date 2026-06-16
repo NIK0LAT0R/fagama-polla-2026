@@ -214,7 +214,7 @@ export default function PlayerManagement() {
       setViewerLoading(true);
 
       try {
-        const next = await getPredictionsByPlayer(selectedPlayerId);
+        const next = await fetchPredictionsByPlayer(selectedPlayerId);
         if (!cancelled) {
           setViewerPredictions(next);
         }

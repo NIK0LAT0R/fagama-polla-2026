@@ -45,7 +45,10 @@ function MatchRow({
   playerId,
   onDraftChange,
 }) {
-  const locked = isMatchLocked(match);
+  /* Desbloquear predicciones para testing, pero la idea es usar isMatchLocked(match) para esto
+  const locked = false;*/
+  //const locked = isMatchLocked(match);
+  const locked = isMatchLocked(match)
   const [countdown, setCountdown] = useState(() => formatCountdown(match.lockAt));
 
   useEffect(() => {

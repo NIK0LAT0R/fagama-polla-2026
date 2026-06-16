@@ -10,7 +10,7 @@
 
 export const PLAYER_DELEGATIONS_BY_NAME = {
   'Amanda Gamboa': ['Amanda Gamboa', 'Nestor Gamboa', 'Aura C'],
-  'Nicolas Gamboa': ['Nicolas Gamboa', 'Tochi', 'Leonardo Baez'],
+  'Nicolas Gamboa': ['Nicolas Gamboa', 'Tochi', 'Julio padilla'],
   'Sonia Rodriguez': ['Sonia Rodriguez', 'Alejandro Gamboa', 'Luciana Gamboa'],
   'Nestor Gamboa': ['Nestor Gamboa', 'Heidy Gamboa'],
   'Leonardo Padilla': ['Leonardo Padilla', 'Bianca Padilla'],
