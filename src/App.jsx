@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import { useAdmin } from './context/AdminContext.jsx';
 import { useApp } from './context/AppContext.jsx';
@@ -16,14 +17,6 @@ import { clearClaimedPlayerId, clearActingPlayerId } from './services/storage.js
 import { resetAnonymousSession } from './services/firebase.js';
 
 import './App.css';
-
-const VIEWS = {
-  players: PlayerManagement,
-  matches: MatchesPredictions,
-  results: ResultsInput,
-  rules: RulesInfo,
-  leaderboard: Leaderboard,
-};
 
 function LoadingScreen() {
   return (
@@ -164,6 +157,10 @@ export default function App() {
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [logoFailed, setLogoFailed] = useState(false);
 
+  // ✅ nuevo: jugador seleccionado desde Leaderboard
+  const [viewerPlayerFromLeaderboard, setViewerPlayerFromLeaderboard] =
+    useState(null);
+
   const previousClaimedPlayerIdRef = useRef(null);
 
   const { isAdmin, loginAdmin, logoutAdmin } = useAdmin();
@@ -174,8 +171,6 @@ export default function App() {
     switchablePlayers,
     switchActivePlayer,
   } = useApp();
-
-  const ActiveView = VIEWS[activeTab] ?? MatchesPredictions;
 
   useEffect(() => {
     // Jugador normal no debe ver Results
@@ -292,7 +287,9 @@ export default function App() {
                   onError={() => setLogoFailed(true)}
                 />
               ) : (
-                <span className="header-icon" aria-hidden="true">🏆</span>
+                <span className="header-icon" aria-hidden="true">
+                  🏆
+                </span>
               )}
             </div>
           </button>
@@ -334,7 +331,28 @@ export default function App() {
       />
 
       <main className="app-main">
-        <ActiveView onDirtyChange={setHasUnsavedChanges} />
+        {activeTab === 'matches' && (
+          <MatchesPredictions onDirtyChange={setHasUnsavedChanges} />
+        )}
+
+        {activeTab === 'leaderboard' && (
+          <Leaderboard
+            onInspectPlayer={(playerId) => {
+              setViewerPlayerFromLeaderboard(String(playerId));
+              setActiveTab('players');
+            }}
+          />
+        )}
+
+        {activeTab === 'players' && (
+          <PlayerManagement
+            externalViewerPlayerId={viewerPlayerFromLeaderboard}
+            onViewerConsumed={() => setViewerPlayerFromLeaderboard(null)}
+          />
+        )}
+
+        {activeTab === 'results' && <ResultsInput />}
+        {activeTab === 'rules' && <RulesInfo />}
       </main>
 
       <footer className="app-footer">

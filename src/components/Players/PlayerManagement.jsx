@@ -8,7 +8,6 @@ import { getPlayerImageSrc, getPlayerInitials } from '../../utils/playerImages.j
 import { getTeamFlagSrc } from '../../utils/flags.js';
 import { STAGES } from '../../data/matches.js';
 
-
 function TeamFlag({ teamName }) {
   const [failed, setFailed] = useState(false);
   const src = getTeamFlagSrc(teamName);
@@ -31,29 +30,66 @@ function TeamFlag({ teamName }) {
   );
 }
 
+
+function isSameLocalDay(dateLike, baseDate = new Date()) {
+  const d = new Date(dateLike);
+
+  if (Number.isNaN(d.getTime())) return false;
+
+  return (
+    d.getFullYear() === baseDate.getFullYear() &&
+    d.getMonth() === baseDate.getMonth() &&
+    d.getDate() === baseDate.getDate()
+  );
+}
+
+
+
+
 function sortPredictionItemsByCountdown(items) {
   const now = Date.now();
 
   return [...items].sort((a, b) => {
-    const aLock = new Date(a.match.lockAt ?? a.match.datetime).getTime();
-    const bLock = new Date(b.match.lockAt ?? b.match.datetime).getTime();
+    const aDate = a.match.lockAt ?? a.match.datetime;
+    const bDate = b.match.lockAt ?? b.match.datetime;
+
+    const aLock = new Date(aDate).getTime();
+    const bLock = new Date(bDate).getTime();
+
+    const aIsToday = isSameLocalDay(a.match.datetime ?? a.match.lockAt);
+    const bIsToday = isSameLocalDay(b.match.datetime ?? b.match.lockAt);
+
+    // 1) PRIORIDAD ABSOLUTA: partidos de hoy primero
+    if (aIsToday !== bIsToday) {
+      return aIsToday ? -1 : 1;
+    }
+
+    // 2) Si ambos son de hoy:
+    //    se ordenan por hora del partido/cierre (más temprano primero)
+    if (aIsToday && bIsToday) {
+      return aLock - bLock;
+    }
 
     const aLocked = aLock <= now;
     const bLocked = bLock <= now;
 
-    // Primero partidos NO bloqueados
+    // 3) Para partidos que NO son de hoy:
+    //    primero los NO bloqueados
     if (aLocked !== bLocked) {
       return aLocked ? 1 : -1;
     }
 
-    // Si ambos están abiertos: el más próximo al cierre primero
+    // 4) Si ambos están abiertos:
+    //    el que se cierra más pronto primero
     if (!aLocked && !bLocked) {
       return aLock - bLock;
     }
 
-    // Si ambos están bloqueados: el más recientemente jugado primero
+    // 5) Si ambos están bloqueados:
+    //    el más reciente primero
     const aMatchTime = new Date(a.match.datetime).getTime();
     const bMatchTime = new Date(b.match.datetime).getTime();
+
     return bMatchTime - aMatchTime;
   });
 }
@@ -155,7 +191,10 @@ function AlbumPlayerCard({
   );
 }
 
-export default function PlayerManagement() {
+export default function PlayerManagement({
+  externalViewerPlayerId,
+  onViewerConsumed,
+}) {
   const {
     players,
     claimedPlayer,
@@ -178,6 +217,17 @@ export default function PlayerManagement() {
   const [predictionStageFilter, setPredictionStageFilter] = useState('upcoming');
   const [viewerPredictions, setViewerPredictions] = useState([]);
   const [viewerLoading, setViewerLoading] = useState(false);
+
+  // ✅ Recibe jugador desde Leaderboard y abre automáticamente el viewer
+  useEffect(() => {
+    if (!externalViewerPlayerId) return;
+
+    setSelectedPlayerId(String(externalViewerPlayerId));
+    setViewerOpen(true);
+    setPredictionStageFilter('upcoming');
+
+    onViewerConsumed?.();
+  }, [externalViewerPlayerId, onViewerConsumed]);
 
   const filteredPlayers = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -508,12 +558,19 @@ export default function PlayerManagement() {
                               ? `${result.scoreA} – ${result.scoreB}`
                               : 'Pendiente'}
                           </strong>
-                        </div>
-
+                        </div>                        
                         <div className="prediction-card__item">
                           <span className="prediction-card__label">Puntos</span>
-                          <strong>{result ? points ?? 0 : '–'}</strong>
+
+                          {result ? (
+                            <span className={`points-chip points-${points ?? 0}`}>
+                              +{points ?? 0} pts
+                            </span>
+                          ) : (
+                            <strong>–</strong>
+                          )}
                         </div>
+
                       </div>
                     </article>
                   ))}

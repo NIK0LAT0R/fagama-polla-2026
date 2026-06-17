@@ -1,9 +1,10 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { useApp } from '../../context/AppContext.jsx';
-import { calculateStandings } from '../../services/scoring.js';
+import { calculateStandings, calculateMatchPoints } from '../../services/scoring.js';
 import { fetchAllPredictions } from '../../services/cosmosApi.js';
 import { exportStandingsToCSV } from '../../utils/csvExport.js';
+import { getPlayerImageSrc, getPlayerInitials } from '../../utils/playerImages.js';
 
 function rankClass(rank) {
   if (rank === 1) return 'rank-gold';
@@ -12,8 +13,57 @@ function rankClass(rank) {
   return '';
 }
 
-export default function Leaderboard() {
-  const { players, results } = useApp();
+function isSameLocalDay(dateLike, baseDate = new Date()) {
+  const d = new Date(dateLike);
+
+  if (Number.isNaN(d.getTime())) return false;
+
+  return (
+    d.getFullYear() === baseDate.getFullYear() &&
+    d.getMonth() === baseDate.getMonth() &&
+    d.getDate() === baseDate.getDate()
+  );
+}
+
+function PlayerMiniAvatar({ playerName }) {
+  const [failed, setFailed] = useState(false);
+  const src = getPlayerImageSrc(playerName);
+
+  if (!src || failed) {
+    return (
+      <div className="leaderboard-player-avatar leaderboard-player-avatar-fallback">
+        {getPlayerInitials(playerName)}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={playerName}
+      className="leaderboard-player-avatar"
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
+function buildResultsMap(results) {
+  if (results instanceof Map) return results;
+
+  if (Array.isArray(results)) {
+    return new Map(
+      results.map((result) => [
+        String(result.matchId ?? result.id),
+        result,
+      ])
+    );
+  }
+
+  return new Map();
+}
+
+export default function Leaderboard({ onInspectPlayer }) {
+  const { players, results, matches } = useApp();
   const [allPredictions, setAllPredictions] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -50,10 +100,49 @@ export default function Leaderboard() {
   }, []);
 
   const standings = useMemo(() => {
-    return calculateStandings(players, allPredictions, results).sort(
-      (a, b) => b.totalPoints - a.totalPoints || a.name.localeCompare(b.name)
+    const baseStandings = calculateStandings(players, allPredictions, results).map((entry) => {
+      const matchedPlayer =
+        players.find((p) => String(p.id) === String(entry.playerId)) ||
+        players.find((p) => p.name === entry.name);
+
+      return {
+        ...entry,
+        playerId: matchedPlayer?.id ?? entry.playerId ?? entry.name,
+        dailyPoints: 0,
+      };
+    });
+
+    const resultsMap = buildResultsMap(results);
+    const matchMap = new Map(matches.map((match) => [String(match.id), match]));
+    const standingsMap = new Map(
+      baseStandings.map((entry) => [String(entry.playerId), entry])
     );
-  }, [players, allPredictions, results]);
+
+    const today = new Date();
+
+    allPredictions.forEach((prediction) => {
+      const playerEntry = standingsMap.get(String(prediction.playerId));
+      const match = matchMap.get(String(prediction.matchId));
+      const result = resultsMap.get(String(prediction.matchId));
+
+      if (!playerEntry || !match || !result) return;
+
+      const matchDate = match.lockAt ?? match.datetime;
+      if (!isSameLocalDay(matchDate, today)) return;
+
+      const points = calculateMatchPoints(prediction, result);
+      playerEntry.dailyPoints += points;
+    });
+
+    return [...baseStandings].sort((a, b) => {
+      if (b.totalPoints !== a.totalPoints) return b.totalPoints - a.totalPoints;
+      if (b.dailyPoints !== a.dailyPoints) return b.dailyPoints - a.dailyPoints;
+      if ((b.scoredMatches ?? 0) !== (a.scoredMatches ?? 0)) {
+        return (b.scoredMatches ?? 0) - (a.scoredMatches ?? 0);
+      }
+      return a.name.localeCompare(b.name);
+    });
+  }, [players, allPredictions, results, matches]);
 
   return (
     <section className="panel">
@@ -90,7 +179,7 @@ export default function Leaderboard() {
                 <th scope="col">Posición</th>
                 <th scope="col">Jugador</th>
                 <th scope="col">Puntos</th>
-                <th scope="col">Score</th>
+                <th scope="col">Acum.hoy</th>
               </tr>
             </thead>
             <tbody>
@@ -110,9 +199,26 @@ export default function Leaderboard() {
                       </span>
                     </td>
 
-                    <td className="player-cell">{entry.name}</td>
+                    <td className="player-cell">
+                      <div className="leaderboard-player-cell">
+                        <PlayerMiniAvatar playerName={entry.name} />
+
+                        <div className="leaderboard-player-meta">
+                          <div className="leaderboard-player-name">{entry.name}</div>
+
+                          <button
+                            type="button"
+                            className="leaderboard-player-link"
+                            onClick={() => onInspectPlayer?.(entry.playerId)}
+                          >
+                            Ver predicciones
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+
                     <td className="points-cell">{entry.totalPoints}</td>
-                    <td>{entry.scoredMatches}</td>
+                    <td className="daily-points-cell">{entry.dailyPoints}</td>
                   </tr>
                 );
               })}

@@ -5,6 +5,8 @@ import { useApp } from '../../context/AppContext.jsx';
 import { predictionKey } from '../../utils/matchUtils.js';
 import MatchRow from './MatchRow.jsx';
 
+
+/* Función para ordenar partidos por cercanía al cierre, con prioridad a los partidos de hoy.
 function sortMatchesByCountdown(matchList) {
   const now = Date.now();
 
@@ -31,6 +33,71 @@ function sortMatchesByCountdown(matchList) {
     return bMatchTime - aMatchTime;
   });
 }
+*/
+
+
+function isSameLocalDay(dateLike, baseDate = new Date()) {
+  const d = new Date(dateLike);
+
+  if (Number.isNaN(d.getTime())) return false;
+
+  return (
+    d.getFullYear() === baseDate.getFullYear() &&
+    d.getMonth() === baseDate.getMonth() &&
+    d.getDate() === baseDate.getDate()
+  );
+}
+
+function sortMatchesByCountdown(matchList) {
+  const now = Date.now();
+
+  return [...matchList].sort((a, b) => {
+    const aDate = a.lockAt ?? a.datetime;
+    const bDate = b.lockAt ?? b.datetime;
+
+    const aLock = new Date(aDate).getTime();
+    const bLock = new Date(bDate).getTime();
+
+    const aIsToday = isSameLocalDay(a.datetime ?? a.lockAt);
+    const bIsToday = isSameLocalDay(b.datetime ?? b.lockAt);
+
+    // 1) PRIORIDAD ABSOLUTA: partidos de hoy primero
+    if (aIsToday !== bIsToday) {
+      return aIsToday ? -1 : 1;
+    }
+
+    // 2) Si ambos son de hoy:
+    //    se ordenan por hora del partido/cierre (más temprano primero)
+    if (aIsToday && bIsToday) {
+      return aLock - bLock;
+    }
+
+    const aLocked = aLock <= now;
+    const bLocked = bLock <= now;
+
+    // 3) Para partidos que NO son de hoy:
+    //    primero los NO bloqueados
+    if (aLocked !== bLocked) {
+      return aLocked ? 1 : -1;
+    }
+
+    // 4) Si ambos están abiertos:
+    //    el que se cierra más pronto primero
+    if (!aLocked && !bLocked) {
+      return aLock - bLock;
+    }
+
+    // 5) Si ambos están bloqueados:
+    //    el más reciente primero
+    const aMatchTime = new Date(a.datetime).getTime();
+    const bMatchTime = new Date(b.datetime).getTime();
+
+    return bMatchTime - aMatchTime;
+  });
+}
+
+
+
 
 export default function MatchesPredictions({ onDirtyChange }) {
   const {
