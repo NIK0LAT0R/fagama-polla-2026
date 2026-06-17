@@ -355,18 +355,18 @@ body {
   border-radius: 999px;
   padding: 12px 18px;
   min-height: 44px;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+  background: linear-gradient(135deg, #da184f, #8f0928);
   color: white;
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.35);
+  box-shadow: 0 6px 16px rgba(214, 22, 137, 0.35);
   transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
 
 .save-drafts-btn:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(22, 163, 74, 0.45);
+  box-shadow: 0 10px 22px rgba(15, 121, 202, 0.45);
 }
 
 .save-drafts-btn:disabled {
@@ -1463,7 +1463,7 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #29c7d2, #3f8cff);
+  background: linear-gradient(135deg, #190664, #0b1bc6);
   color: white;
   box-shadow: 0 10px 20px rgba(63, 140, 255, 0.20);
 }
@@ -1473,7 +1473,7 @@ body {
 }
 
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(230, 227, 70, 0.85);
   color: #102132;
   border: 1px solid rgba(15, 23, 42, 0.08);
 }
@@ -3019,4 +3019,84 @@ body {
   color: #c79f1c !important;
   font-weight: 700;
   opacity: 1 !important;
+}
+
+.album-card-alert {
+  box-shadow:
+    0 0 0 3px rgba(220, 38, 38, 0.75),
+    0 0 22px rgba(220, 38, 38, 0.35);
+  animation: album-card-alert-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes album-card-alert-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px rgba(220, 38, 38, 0.75),
+      0 0 22px rgba(220, 38, 38, 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px rgba(220, 38, 38, 0.95),
+      0 0 30px rgba(220, 38, 38, 0.5);
+  }
+}
+
+.album-status-tag.alert {
+  background: rgba(220, 38, 38, 0.14);
+  color: #c62828;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.album-card-missing-counter {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #c62828;
+}
+
+.album-card-alert {
+  box-shadow:
+    0 0 0 3px rgba(220, 38, 38, 0.75),
+    0 0 22px rgba(220, 38, 38, 0.35);
+  animation: album-card-alert-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes album-card-alert-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 3px rgba(220, 38, 38, 0.75),
+      0 0 22px rgba(220, 38, 38, 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px rgba(220, 38, 38, 0.95),
+      0 0 30px rgba(220, 38, 38, 0.5);
+  }
+}
+
+.album-card-missing-counter {
+  margin-top: 0.5rem;
+  min-height: 2.8rem; /* mantiene altura pareja entre cards */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.3;
+  padding: 0 0.35rem;
+}
+
+.album-card-missing-counter.pending {
+  color: #c62828;
+}
+
+.album-card-missing-counter.clear {
+  color: #198754;
+}
+
+.album-card-missing-counter {
+  min-height: 2.8rem;
 }

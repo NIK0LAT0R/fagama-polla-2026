@@ -3,10 +3,31 @@ import { useEffect, useMemo, useState } from 'react';
 import { useAdmin } from '../../context/AdminContext.jsx';
 import { useApp } from '../../context/AppContext.jsx';
 import { calculateMatchPoints } from '../../services/scoring.js';
-import { fetchPredictionsByPlayer } from '../../services/cosmosApi.js';
+import {
+  fetchPredictionsByPlayer,
+  fetchAllPredictions,
+} from '../../services/cosmosApi.js';
 import { getPlayerImageSrc, getPlayerInitials } from '../../utils/playerImages.js';
 import { getTeamFlagSrc } from '../../utils/flags.js';
 import { STAGES } from '../../data/matches.js';
+
+
+import { exportToExcel } from "@/utils/exportExcel";
+
+<button
+  onClick={exportToExcel}
+  style={{
+    padding: "10px 15px",
+    backgroundColor: "#4CAF50",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer"
+  }}
+>
+  Exportar Predicciones
+</button>
+
 
 function TeamFlag({ teamName }) {
   const [failed, setFailed] = useState(false);
@@ -30,7 +51,6 @@ function TeamFlag({ teamName }) {
   );
 }
 
-
 function isSameLocalDay(dateLike, baseDate = new Date()) {
   const d = new Date(dateLike);
 
@@ -43,8 +63,11 @@ function isSameLocalDay(dateLike, baseDate = new Date()) {
   );
 }
 
-
-
+function addDays(baseDate, days) {
+  const d = new Date(baseDate);
+  d.setDate(d.getDate() + days);
+  return d;
+}
 
 function sortPredictionItemsByCountdown(items) {
   const now = Date.now();
@@ -94,23 +117,26 @@ function sortPredictionItemsByCountdown(items) {
   });
 }
 
+
 function AlbumPlayerCard({
   player,
   isLinked,
   isClaimed,
   isSelected,
   isAdmin,
+  missingTomorrowCount,
   onSelect,
   onRemove,
   onViewPredictions,
 }) {
   const [imageFailed, setImageFailed] = useState(false);
+  const needsTomorrowPredictions = missingTomorrowCount > 0;
 
   return (
     <article
       className={`album-card album-card-management ${
         isSelected ? 'album-card-selected' : ''
-      }`}
+      } ${needsTomorrowPredictions ? 'album-card-alert' : ''}`}
       onClick={onSelect}
       role="button"
       tabIndex={0}
@@ -152,6 +178,20 @@ function AlbumPlayerCard({
       <div className="album-card-footer">
         <div className="album-card-name">{player.name}</div>
 
+        <div
+          className={
+            needsTomorrowPredictions
+              ? 'album-card-missing-counter pending'
+              : 'album-card-missing-counter clear'
+          }
+        >
+          {needsTomorrowPredictions
+            ? missingTomorrowCount === 1
+              ? 'Falta 1 marcador de mañana'
+              : `Faltan ${missingTomorrowCount} marcadores de mañana`
+            : 'No hay marcadores pendientes'}
+        </div>
+
         <div className="album-card-subtitle">
           <button
             type="button"
@@ -161,7 +201,7 @@ function AlbumPlayerCard({
               onViewPredictions(player.id);
             }}
           >
-            Chismosear predicciones
+            Chismosear predicción
           </button>
         </div>
 
@@ -191,6 +231,7 @@ function AlbumPlayerCard({
   );
 }
 
+
 export default function PlayerManagement({
   externalViewerPlayerId,
   onViewerConsumed,
@@ -218,6 +259,10 @@ export default function PlayerManagement({
   const [viewerPredictions, setViewerPredictions] = useState([]);
   const [viewerLoading, setViewerLoading] = useState(false);
 
+  // ✅ nuevas: para alertas de "faltan marcadores de mañana"
+  const [allPredictions, setAllPredictions] = useState([]);
+  const [dayAnchor, setDayAnchor] = useState(() => Date.now());
+
   // ✅ Recibe jugador desde Leaderboard y abre automáticamente el viewer
   useEffect(() => {
     if (!externalViewerPlayerId) return;
@@ -228,6 +273,68 @@ export default function PlayerManagement({
 
     onViewerConsumed?.();
   }, [externalViewerPlayerId, onViewerConsumed]);
+
+  // ✅ Carga todas las predicciones para calcular alertas de mañana
+  useEffect(() => {
+    let cancelled = false;
+
+    
+    async function loadAllPredictions() {
+      try {
+        let all = [];
+
+        for (const player of players) {
+          try {
+            const preds = await fetchPredictionsByPlayer(player.id);
+
+            if (Array.isArray(preds)) {
+              const normalized = preds.map(p => ({
+                playerId: p.playerId || player.id,
+                matchId: p.matchId
+              }));
+
+              all.push(...normalized);
+            }
+          } catch (err) {
+            console.warn("Error cargando predicciones de", player.id);
+          }
+        }
+
+        if (!cancelled) {
+          setAllPredictions(all);
+        }
+
+      } catch (error) {
+        console.error('Error loading all predictions:', error);
+
+        if (!cancelled) {
+          setAllPredictions([]);
+        }
+      }
+    }
+
+
+    loadAllPredictions();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // ✅ Recalcula automáticamente a la próxima medianoche
+  useEffect(() => {
+    const now = new Date();
+    const nextMidnight = new Date(now);
+    nextMidnight.setHours(24, 0, 0, 0);
+
+    const msUntilMidnight = nextMidnight.getTime() - now.getTime();
+
+    const timeout = setTimeout(() => {
+      setDayAnchor(Date.now());
+    }, msUntilMidnight + 1000);
+
+    return () => clearTimeout(timeout);
+  }, [dayAnchor]);
 
   const filteredPlayers = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -324,6 +431,40 @@ export default function PlayerManagement({
     return items;
   }, [selectedPlayerPredictions, predictionStageFilter]);
 
+  // ✅ Día objetivo: mañana
+  const targetTomorrowDate = useMemo(() => {
+    return addDays(new Date(dayAnchor), 1);
+  }, [dayAnchor]);
+
+  // ✅ Partidos del día siguiente
+  const tomorrowMatches = useMemo(() => {
+    return matches.filter((match) =>
+      isSameLocalDay(match.datetime ?? match.lockAt, targetTomorrowDate)
+    );
+  }, [matches, targetTomorrowDate]);
+
+  // ✅ Cantidad de partidos que le faltan a cada jugador para mañana
+  const missingTomorrowCountByPlayer = useMemo(() => {
+    const predictionSet = new Set(
+      allPredictions.map(
+        (prediction) => `${String(prediction.playerId)}_${String(prediction.matchId)}`
+      )
+    );
+
+    const resultMapCounts = new Map();
+
+    players.forEach((player) => {
+      const missingCount = tomorrowMatches.reduce((acc, match) => {
+        const key = `${String(player.id)}_${String(match.id)}`;
+        return predictionSet.has(key) ? acc : acc + 1;
+      }, 0);
+
+      resultMapCounts.set(String(player.id), missingCount);
+    });
+
+    return resultMapCounts;
+  }, [players, tomorrowMatches, allPredictions]);
+
   function openPredictionsView(playerId) {
     setSelectedPlayerId(String(playerId));
     setViewerOpen(true);
@@ -373,17 +514,29 @@ export default function PlayerManagement({
     <>
       {!viewerOpen ? (
         <section className="panel">
-          <header className="panel-header">
-            <div>
-              <h2>Álbum de jugadores</h2>
-              <p className="panel-subtitle">
-                {isAdmin
-                  ? 'Administra figuritas, comparte códigos y revisa predicciones.'
-                  : `Vinculado como ${claimedPlayer?.name ?? 'tu jugador'}.`}
-              </p>
-            </div>
-            <span className="badge">{players.length} players</span>
-          </header>
+          
+        <header className="panel-header">
+          <div>
+            <h2>Álbum de jugadores</h2>
+            <p className="panel-subtitle">
+              {isAdmin
+                ? 'Administra figuritas, comparte códigos y revisa predicciones.'
+                : `Vinculado como ${claimedPlayer?.name ?? 'tu jugador'}.`}
+            </p>
+          </div>
+
+          {/* 🔥 BOTÓN EXPORT */}
+          <button
+            onClick={exportToExcel}
+            className="btn btn-success"
+            style={{ marginLeft: "10px" }}
+          >
+            Exportar Excel
+          </button>
+
+          <span className="badge">{players.length} players</span>
+        </header>
+
 
           {claimedPlayer && !isAdmin && (
             <div className="info-banner linked-player-banner">
@@ -433,6 +586,8 @@ export default function PlayerManagement({
               {filteredPlayers.map((player) => {
                 const isLinked = String(player.id) === String(claimedPlayer?.id);
                 const isClaimed = Boolean(player.claimedByUid);
+                const missingTomorrowCount =
+                  missingTomorrowCountByPlayer.get(String(player.id)) ?? 0;
 
                 return (
                   <AlbumPlayerCard
@@ -442,6 +597,7 @@ export default function PlayerManagement({
                     isClaimed={isClaimed}
                     isSelected={String(player.id) === String(selectedPlayerId)}
                     isAdmin={isAdmin}
+                    missingTomorrowCount={missingTomorrowCount}
                     onSelect={() => setSelectedPlayerId(player.id)}
                     onRemove={handleRemove}
                     onViewPredictions={openPredictionsView}
@@ -558,7 +714,8 @@ export default function PlayerManagement({
                               ? `${result.scoreA} – ${result.scoreB}`
                               : 'Pendiente'}
                           </strong>
-                        </div>                        
+                        </div>
+
                         <div className="prediction-card__item">
                           <span className="prediction-card__label">Puntos</span>
 
@@ -570,7 +727,6 @@ export default function PlayerManagement({
                             <strong>–</strong>
                           )}
                         </div>
-
                       </div>
                     </article>
                   ))}
