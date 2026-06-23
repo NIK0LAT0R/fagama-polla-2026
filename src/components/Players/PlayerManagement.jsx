@@ -3,35 +3,19 @@ import { useEffect, useMemo, useState } from 'react';
 import { useAdmin } from '../../context/AdminContext.jsx';
 import { useApp } from '../../context/AppContext.jsx';
 import { calculateMatchPoints } from '../../services/scoring.js';
-import {
-  fetchPredictionsByPlayer,
-  fetchAllPredictions,
-} from '../../services/cosmosApi.js';
+import { fetchPredictionsByPlayer } from '../../services/cosmosApi.js';
 import { getPlayerImageSrc, getPlayerInitials } from '../../utils/playerImages.js';
 import { getTeamFlagSrc } from '../../utils/flags.js';
 import { STAGES } from '../../data/matches.js';
-
-
-import { exportToExcel } from "@/utils/exportExcel";
-
-<button
-  onClick={exportToExcel}
-  style={{
-    padding: "10px 15px",
-    backgroundColor: "#4CAF50",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer"
-  }}
->
-  Exportar Predicciones
-</button>
-
+import { exportToExcel } from '../../utils/exportExcel.js';
 
 function TeamFlag({ teamName }) {
   const [failed, setFailed] = useState(false);
   const src = getTeamFlagSrc(teamName);
+
+  useEffect(() => {
+    setFailed(false);
+  }, [teamName]);
 
   if (!src || failed) {
     return (
@@ -51,22 +35,142 @@ function TeamFlag({ teamName }) {
   );
 }
 
-function isSameLocalDay(dateLike, baseDate = new Date()) {
-  const d = new Date(dateLike);
+/**
+ * Extrae partes de fecha interpretadas en hora de Colombia.
+ * OJO: la base sigue saliendo del reloj del dispositivo del usuario.
+ * Luego la reinterpretamos en America/Bogota.
+ */
+function getColombiaDateParts(dateLike) {
+  const date = new Date(dateLike);
 
-  if (Number.isNaN(d.getTime())) return false;
+  if (Number.isNaN(date.getTime())) return null;
 
-  return (
-    d.getFullYear() === baseDate.getFullYear() &&
-    d.getMonth() === baseDate.getMonth() &&
-    d.getDate() === baseDate.getDate()
-  );
+  const formatter = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Bogota',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    hour12: false,
+    minute: '2-digit',
+    second: '2-digit',
+  });
+
+  const parts = formatter.formatToParts(date);
+  const get = (type) => parts.find((p) => p.type === type)?.value;
+
+  return {
+    year: Number(get('year')),
+    month: Number(get('month')),
+    day: Number(get('day')),
+    hour: Number(get('hour')),
+    minute: Number(get('minute')),
+    second: Number(get('second')),
+  };
 }
 
-function addDays(baseDate, days) {
-  const d = new Date(baseDate);
-  d.setDate(d.getDate() + days);
-  return d;
+/**
+ * Convierte cualquier fecha en una "clave de día" en Colombia: YYYY-MM-DD
+ */
+function getColombiaDayKey(dateLike) {
+  const parts = getColombiaDateParts(dateLike);
+  if (!parts) return '';
+
+  const month = String(parts.month).padStart(2, '0');
+  const day = String(parts.day).padStart(2, '0');
+
+  return `${parts.year}-${month}-${day}`;
+}
+
+/**
+ * Suma días a una dayKey YYYY-MM-DD sin depender de la zona local del dispositivo.
+ */
+function addDaysToDayKey(dayKey, days) {
+  if (!dayKey) return '';
+
+  const [year, month, day] = dayKey.split('-').map(Number);
+
+  // usamos UTC al mediodía para evitar saltos raros
+  const base = new Date(Date.UTC(year, month - 1, day, 12, 0, 0));
+  base.setUTCDate(base.getUTCDate() + days);
+
+  const nextYear = base.getUTCFullYear();
+  const nextMonth = String(base.getUTCMonth() + 1).padStart(2, '0');
+  const nextDay = String(base.getUTCDate()).padStart(2, '0');
+
+  return `${nextYear}-${nextMonth}-${nextDay}`;
+}
+
+function isSameColombiaDay(dateLike, dayKeyOrDate) {
+  const leftKey = getColombiaDayKey(dateLike);
+
+  const rightKey =
+    typeof dayKeyOrDate === 'string'
+      ? dayKeyOrDate
+      : getColombiaDayKey(dayKeyOrDate);
+
+  return leftKey !== '' && leftKey === rightKey;
+}
+
+/**
+ * Regla pedida:
+ * - antes de las 2:00 AM Colombia -> revisar partidos de HOY
+ * - desde las 2:00 AM Colombia -> revisar partidos de MAÑANA
+ *
+ * Eso hace que:
+ * - 1:55 AM -> siga mostrando partidos de hoy
+ * - 6:00 PM -> ya muestre partidos de mañana
+ * - 2:00 AM del día siguiente -> pase a pasado-mañana
+ */
+function getTargetAlertInfo(now = new Date()) {
+  const parts = getColombiaDateParts(now);
+  const todayKey = getColombiaDayKey(now);
+
+  if (!parts || !todayKey) {
+    return {
+      dayKey: '',
+      label: 'pendientes',
+    };
+  }
+
+  if (parts.hour < 2) {
+    return {
+      dayKey: todayKey,
+      label: 'de hoy',
+    };
+  }
+
+  return {
+    dayKey: addDaysToDayKey(todayKey, 1),
+    label: 'de mañana',
+  };
+}
+
+/**
+ * Próximo corte a las 2:00 AM hora Colombia.
+ * Colombia = UTC-5 fijo, así que 2:00 AM Colombia = 07:00 UTC.
+ */
+function getNextColombia2am(now = new Date()) {
+  const parts = getColombiaDateParts(now);
+  if (!parts) return null;
+
+  const today2amUtc = Date.UTC(parts.year, parts.month - 1, parts.day, 7, 0, 0, 0);
+
+  if (now.getTime() < today2amUtc) {
+    return new Date(today2amUtc);
+  }
+
+  const tomorrow2amUtc = Date.UTC(
+    parts.year,
+    parts.month - 1,
+    parts.day + 1,
+    7,
+    0,
+    0,
+    0
+  );
+
+  return new Date(tomorrow2amUtc);
 }
 
 function sortPredictionItemsByCountdown(items) {
@@ -79,8 +183,8 @@ function sortPredictionItemsByCountdown(items) {
     const aLock = new Date(aDate).getTime();
     const bLock = new Date(bDate).getTime();
 
-    const aIsToday = isSameLocalDay(a.match.datetime ?? a.match.lockAt);
-    const bIsToday = isSameLocalDay(b.match.datetime ?? b.match.lockAt);
+    const aIsToday = isSameColombiaDay(a.match.datetime ?? a.match.lockAt, new Date());
+    const bIsToday = isSameColombiaDay(b.match.datetime ?? b.match.lockAt, new Date());
 
     // 1) PRIORIDAD ABSOLUTA: partidos de hoy primero
     if (aIsToday !== bIsToday) {
@@ -117,26 +221,31 @@ function sortPredictionItemsByCountdown(items) {
   });
 }
 
-
 function AlbumPlayerCard({
   player,
   isLinked,
   isClaimed,
   isSelected,
   isAdmin,
-  missingTomorrowCount,
+  missingCount,
+  pendingWindowLabel,
   onSelect,
-  onRemove,
   onViewPredictions,
 }) {
   const [imageFailed, setImageFailed] = useState(false);
-  const needsTomorrowPredictions = missingTomorrowCount > 0;
+  const hasPendingPredictions = missingCount > 0;
+
+  const pendingMessage = hasPendingPredictions
+    ? missingCount === 1
+      ? `Falta 1 marcador ${pendingWindowLabel}`
+      : `Faltan ${missingCount} marcadores ${pendingWindowLabel}`
+    : 'No hay marcadores pendientes';
 
   return (
     <article
       className={`album-card album-card-management ${
         isSelected ? 'album-card-selected' : ''
-      } ${needsTomorrowPredictions ? 'album-card-alert' : ''}`}
+      } ${hasPendingPredictions ? 'album-card-alert' : ''}`}
       onClick={onSelect}
       role="button"
       tabIndex={0}
@@ -180,16 +289,12 @@ function AlbumPlayerCard({
 
         <div
           className={
-            needsTomorrowPredictions
+            hasPendingPredictions
               ? 'album-card-missing-counter pending'
               : 'album-card-missing-counter clear'
           }
         >
-          {needsTomorrowPredictions
-            ? missingTomorrowCount === 1
-              ? 'Falta 1 marcador de mañana'
-              : `Faltan ${missingTomorrowCount} marcadores de mañana`
-            : 'No hay marcadores pendientes'}
+          {pendingMessage}
         </div>
 
         <div className="album-card-subtitle">
@@ -211,26 +316,10 @@ function AlbumPlayerCard({
             <span className="album-code-value">{player.claimCode}</span>
           </div>
         )}
-
-        {isAdmin && (
-          <div className="album-card-actions">
-            <button
-              type="button"
-              className="btn btn-danger"
-              onClick={(e) => {
-                e.stopPropagation();
-                onRemove(player.id);
-              }}
-            >
-              Remove
-            </button>
-          </div>
-        )}
       </div>
     </article>
   );
 }
-
 
 export default function PlayerManagement({
   externalViewerPlayerId,
@@ -242,8 +331,6 @@ export default function PlayerManagement({
     matches,
     resultMap,
     addPlayer,
-    removePlayer,
-    resetAllData,
   } = useApp();
 
   const { isAdmin, requireAdmin } = useAdmin();
@@ -252,18 +339,17 @@ export default function PlayerManagement({
   const [search, setSearch] = useState('');
   const [error, setError] = useState('');
   const [info, setInfo] = useState('');
-  const [confirmReset, setConfirmReset] = useState(false);
   const [selectedPlayerId, setSelectedPlayerId] = useState(claimedPlayer?.id ?? '');
   const [viewerOpen, setViewerOpen] = useState(false);
   const [predictionStageFilter, setPredictionStageFilter] = useState('upcoming');
   const [viewerPredictions, setViewerPredictions] = useState([]);
   const [viewerLoading, setViewerLoading] = useState(false);
 
-  // ✅ nuevas: para alertas de "faltan marcadores de mañana"
+  // Todas las predicciones para calcular pendientes por jugador
   const [allPredictions, setAllPredictions] = useState([]);
   const [dayAnchor, setDayAnchor] = useState(() => Date.now());
 
-  // ✅ Recibe jugador desde Leaderboard y abre automáticamente el viewer
+  // Abre automáticamente viewer desde leaderboard
   useEffect(() => {
     if (!externalViewerPlayerId) return;
 
@@ -274,11 +360,10 @@ export default function PlayerManagement({
     onViewerConsumed?.();
   }, [externalViewerPlayerId, onViewerConsumed]);
 
-  // ✅ Carga todas las predicciones para calcular alertas de mañana
+  // Carga todas las predicciones de todos los jugadores
   useEffect(() => {
     let cancelled = false;
 
-    
     async function loadAllPredictions() {
       try {
         let all = [];
@@ -288,22 +373,21 @@ export default function PlayerManagement({
             const preds = await fetchPredictionsByPlayer(player.id);
 
             if (Array.isArray(preds)) {
-              const normalized = preds.map(p => ({
-                playerId: p.playerId || player.id,
-                matchId: p.matchId
+              const normalized = preds.map((p) => ({
+                playerId: String(p.playerId || player.id),
+                matchId: String(p.matchId),
               }));
 
               all.push(...normalized);
             }
-          } catch (err) {
-            console.warn("Error cargando predicciones de", player.id);
+          } catch {
+            console.warn('Error cargando predicciones de', player.id);
           }
         }
 
         if (!cancelled) {
           setAllPredictions(all);
         }
-
       } catch (error) {
         console.error('Error loading all predictions:', error);
 
@@ -313,25 +397,28 @@ export default function PlayerManagement({
       }
     }
 
-
-    loadAllPredictions();
+    if (players.length > 0) {
+      loadAllPredictions();
+    } else {
+      setAllPredictions([]);
+    }
 
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [players, dayAnchor]);
 
-  // ✅ Recalcula automáticamente a la próxima medianoche
+  // Recalcula automáticamente al próximo corte 2:00 AM Colombia
   useEffect(() => {
-    const now = new Date();
-    const nextMidnight = new Date(now);
-    nextMidnight.setHours(24, 0, 0, 0);
+    const next2am = getNextColombia2am(new Date());
 
-    const msUntilMidnight = nextMidnight.getTime() - now.getTime();
+    if (!next2am) return undefined;
+
+    const msUntilNext2am = next2am.getTime() - Date.now();
 
     const timeout = setTimeout(() => {
       setDayAnchor(Date.now());
-    }, msUntilMidnight + 1000);
+    }, Math.max(msUntilNext2am + 1000, 1000));
 
     return () => clearTimeout(timeout);
   }, [dayAnchor]);
@@ -431,39 +518,40 @@ export default function PlayerManagement({
     return items;
   }, [selectedPlayerPredictions, predictionStageFilter]);
 
-  // ✅ Día objetivo: mañana
-  const targetTomorrowDate = useMemo(() => {
-    return addDays(new Date(dayAnchor), 1);
+  // Día objetivo según corte 2:00 AM Colombia
+  const targetAlertInfo = useMemo(() => {
+    return getTargetAlertInfo(new Date(dayAnchor));
   }, [dayAnchor]);
 
-  // ✅ Partidos del día siguiente
-  const tomorrowMatches = useMemo(() => {
-    return matches.filter((match) =>
-      isSameLocalDay(match.datetime ?? match.lockAt, targetTomorrowDate)
-    );
-  }, [matches, targetTomorrowDate]);
+  const targetAlertDayKey = targetAlertInfo.dayKey;
+  const pendingWindowLabel = targetAlertInfo.label; // "de hoy" o "de mañana"
 
-  // ✅ Cantidad de partidos que le faltan a cada jugador para mañana
-  const missingTomorrowCountByPlayer = useMemo(() => {
+  const targetMatches = useMemo(() => {
+    return matches.filter((match) =>
+      isSameColombiaDay(match.datetime ?? match.lockAt, targetAlertDayKey)
+    );
+  }, [matches, targetAlertDayKey]);
+
+  const missingCountByPlayer = useMemo(() => {
     const predictionSet = new Set(
       allPredictions.map(
         (prediction) => `${String(prediction.playerId)}_${String(prediction.matchId)}`
       )
     );
 
-    const resultMapCounts = new Map();
+    const countsMap = new Map();
 
     players.forEach((player) => {
-      const missingCount = tomorrowMatches.reduce((acc, match) => {
+      const missingCount = targetMatches.reduce((acc, match) => {
         const key = `${String(player.id)}_${String(match.id)}`;
         return predictionSet.has(key) ? acc : acc + 1;
       }, 0);
 
-      resultMapCounts.set(String(player.id), missingCount);
+      countsMap.set(String(player.id), missingCount);
     });
 
-    return resultMapCounts;
-  }, [players, tomorrowMatches, allPredictions]);
+    return countsMap;
+  }, [players, targetMatches, allPredictions]);
 
   function openPredictionsView(playerId) {
     setSelectedPlayerId(String(playerId));
@@ -492,51 +580,34 @@ export default function PlayerManagement({
     });
   }
 
-  function handleRemove(playerId) {
-    requireAdmin(async () => {
-      await removePlayer(playerId);
-    });
-  }
-
-  function handleReset() {
-    if (!confirmReset) {
-      setConfirmReset(true);
-      return;
-    }
-
-    requireAdmin(async () => {
-      await resetAllData();
-      setConfirmReset(false);
-    });
-  }
-
   return (
     <>
       {!viewerOpen ? (
         <section className="panel">
-          
-        <header className="panel-header">
-          <div>
-            <h2>Álbum de jugadores</h2>
-            <p className="panel-subtitle">
-              {isAdmin
-                ? 'Administra figuritas, comparte códigos y revisa predicciones.'
-                : `Vinculado como ${claimedPlayer?.name ?? 'tu jugador'}.`}
-            </p>
-          </div>
+          <header className="panel-header">
+            <div>
+              <h2>Álbum de jugadores</h2>
+              <p className="panel-subtitle">
+                {isAdmin
+                  ? 'Administra figuritas, comparte códigos y revisa predicciones.'
+                  : `Vinculado como ${claimedPlayer?.name ?? 'tu jugador'}.`}
+              </p>
+            </div>
 
-          {/* 🔥 BOTÓN EXPORT */}
-          <button
-            onClick={exportToExcel}
-            className="btn btn-success"
-            style={{ marginLeft: "10px" }}
-          >
-            Exportar Excel
-          </button>
+            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              {isAdmin && (
+                <button
+                  type="button"
+                  onClick={exportToExcel}
+                  className="btn btn-primary"
+                >
+                  Exportar Excel
+                </button>
+              )}
 
-          <span className="badge">{players.length} players</span>
-        </header>
-
+              <span className="badge">{players.length} players</span>
+            </div>
+          </header>
 
           {claimedPlayer && !isAdmin && (
             <div className="info-banner linked-player-banner">
@@ -586,8 +657,8 @@ export default function PlayerManagement({
               {filteredPlayers.map((player) => {
                 const isLinked = String(player.id) === String(claimedPlayer?.id);
                 const isClaimed = Boolean(player.claimedByUid);
-                const missingTomorrowCount =
-                  missingTomorrowCountByPlayer.get(String(player.id)) ?? 0;
+                const missingCount =
+                  missingCountByPlayer.get(String(player.id)) ?? 0;
 
                 return (
                   <AlbumPlayerCard
@@ -597,9 +668,9 @@ export default function PlayerManagement({
                     isClaimed={isClaimed}
                     isSelected={String(player.id) === String(selectedPlayerId)}
                     isAdmin={isAdmin}
-                    missingTomorrowCount={missingTomorrowCount}
+                    missingCount={missingCount}
+                    pendingWindowLabel={pendingWindowLabel}
                     onSelect={() => setSelectedPlayerId(player.id)}
-                    onRemove={handleRemove}
                     onViewPredictions={openPredictionsView}
                   />
                 );
@@ -718,7 +789,6 @@ export default function PlayerManagement({
 
                         <div className="prediction-card__item">
                           <span className="prediction-card__label">Puntos</span>
-
                           {result ? (
                             <span className={`points-chip points-${points ?? 0}`}>
                               +{points ?? 0} pts
@@ -735,21 +805,6 @@ export default function PlayerManagement({
             </>
           )}
         </section>
-      )}
-
-      {isAdmin && (
-        <div className="danger-zone">
-          <h3>Reset Data</h3>
-          <p>Deletes all players, predictions, and results from Firebase.</p>
-          <button
-            type="button"
-            className={`btn ${confirmReset ? 'btn-danger' : 'btn-ghost'}`}
-            onClick={handleReset}
-            onBlur={() => setConfirmReset(false)}
-          >
-            {confirmReset ? 'Confirm reset everything' : 'Reset all data'}
-          </button>
-        </div>
       )}
     </>
   );

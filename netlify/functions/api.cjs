@@ -1,3 +1,4 @@
+
 const { CosmosClient } = require('@azure/cosmos');
 
 const client = new CosmosClient({
@@ -80,7 +81,6 @@ exports.handler = async (event) => {
       const force = Boolean(body.force);
 
       const container = database.container('players');
-
       const { resource } = await container.item(playerId, playerId).read();
 
       if (!resource) {
@@ -122,9 +122,46 @@ exports.handler = async (event) => {
     }
 
     // =========================
+    // POST /results
+    // =========================
+    if (method === 'POST' && path === '/results') {
+      const body = JSON.parse(event.body || '{}');
+
+      const item = {
+        id: String(body.id ?? body.matchId),
+        matchId: String(body.matchId ?? body.id),
+        scoreA: Number(body.scoreA),
+        scoreB: Number(body.scoreB),
+        updatedAt: new Date().toISOString(),
+      };
+
+      await database.container('results').items.upsert(item);
+
+      return response(200, { success: true });
+    }
+
+    // =========================
+    // DELETE /results/:matchId
+    // =========================
+    if (method === 'DELETE' && path.startsWith('/results/')) {
+      const matchId = path.split('/')[2];
+
+      await database
+        .container('results')
+        .item(matchId, matchId)
+        .delete();
+
+      return response(200, { success: true });
+    }
+
+    // =========================
     // GET /predictions/:playerId
     // =========================
-    if (method === 'GET' && path.startsWith('/predictions/')) {
+    if (
+      method === 'GET' &&
+      path.startsWith('/predictions/') &&
+      path !== '/predictions-all'
+    ) {
       const playerId = path.split('/')[2];
 
       const query = {
@@ -173,66 +210,84 @@ exports.handler = async (event) => {
     }
 
     // =========================
-    // POST /results
+    // GET /matches-overrides
     // =========================
-    if (method === 'POST' && path === '/results') {
+    if (method === 'GET' && path === '/matches-overrides') {
+      const { resources } = await database
+        .container('matches')
+        .items.readAll()
+        .fetchAll();
+
+      return response(200, resources);
+    }
+
+    // =========================
+    // POST /matches/:matchId/teams
+    // =========================
+    if (
+      method === 'POST' &&
+      path.startsWith('/matches/') &&
+      path.endsWith('/teams')
+    ) {
+      const matchId = path.split('/')[2];
       const body = JSON.parse(event.body || '{}');
 
+      const teamA = String(body.teamA ?? '').trim();
+      const teamB = String(body.teamB ?? '').trim();
+
+      if (!teamA || !teamB) {
+        return response(400, { error: 'TEAM_NAMES_REQUIRED' });
+      }
+
+      const container = database.container('matches');
+
+      let existing = null;
+      try {
+        const readResult = await container.item(matchId, matchId).read();
+        existing = readResult.resource ?? null;
+      } catch {
+        existing = null;
+      }
+
       const item = {
-        id: String(body.id ?? body.matchId),
-        matchId: String(body.matchId ?? body.id),
-        scoreA: Number(body.scoreA),
-        scoreB: Number(body.scoreB),
+        ...(existing || {}),
+        id: String(matchId),
+        teamA,
+        teamB,
         updatedAt: new Date().toISOString(),
       };
 
-      await database.container('results').items.upsert(item);
+      await container.items.upsert(item);
 
-      return response(200, { success: true });
+      return response(200, item);
     }
 
     // =========================
-    // DELETE /results/:matchId
-    // =========================
-    if (method === 'DELETE' && path.startsWith('/results/')) {
-      const matchId = path.split('/')[2];
-
-      await database
-        .container('results')
-        .item(matchId, matchId)
-        .delete();
-
-      return response(200, { success: true });
-    }
-
-// =========================
     // GET /health
     // =========================
     if (method === 'GET' && path === '/health') {
       return response(200, {
         ok: true,
-        version: '2026-06-14-netlify-final',
+        version: '2026-06-02-api-clean',
         routes: [
           '/players',
           '/claim-player',
           '/results',
+          '/results (POST)',
+          '/results/:matchId (DELETE)',
           '/predictions/:playerId',
           '/predictions-all',
-          '/predictions',
-          '/results (POST)',
-          '/results/:matchId (DELETE)'
+          '/predictions (POST)',
+          '/matches-overrides',
+          '/matches/:matchId/teams',
         ],
-        database: 'fagama-polla'
+        database: 'fagama-polla',
       });
     }
 
-    // =========================
-    // NOT FOUND
-    // =========================
     return response(404, { error: 'Route not found' });
   } catch (error) {
     console.error('Function error:', error);
-
     return response(500, {
       error: error.message,
     });

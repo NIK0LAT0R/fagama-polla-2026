@@ -1,62 +1,147 @@
-require('dotenv').config();
-const { CosmosClient } = require('@azure/cosmos');
 
-// ✅ Validación básica
-if (!process.env.COSMOS_CONNECTION_STRING) {
-  throw new Error('❌ Falta COSMOS_CONNECTION_STRING en el .env');
-}
+const API_BASE = '/.netlify/functions/api';
 
-// ✅ Cliente
-const client = new CosmosClient(process.env.COSMOS_CONNECTION_STRING);
+async function apiGet(path) {
+  const response = await fetch(`${API_BASE}${path}`);
 
-// ✅ Config (ajusta si tus nombres son distintos)
-const databaseId = 'pollaDB';
-const matchesContainerId = 'matches';
-const predictionsContainerId = 'predictions';
-
-// ✅ Referencias
-const database = client.database(databaseId);
-const matchesContainer = database.container(matchesContainerId);
-const predictionsContainer = database.container(predictionsContainerId);
-
-// ✅ Guardar partido
-async function saveMatch(match) {
-  try {
-    const item = {
-      id: `${match.team1}-${match.team2}`,
-      team1: match.team1,
-      team2: match.team2,
-      score1: Number(match.score1 || 0),
-      score2: Number(match.score2 || 0),
-      date: match.date || new Date().toISOString()
-    };
-
-    await matchesContainer.items.upsert(item);
-    console.log(`✅ Match: ${item.team1} vs ${item.team2}`);
-  } catch (err) {
-    console.error('❌ Error guardando match:', err.message);
+  if (!response.ok) {
+    let detail = '';
+    try {
+      const body = await response.json();
+      detail = body?.error ? ` - ${body.error}` : '';
+    } catch {
+      // ignore
+    }
+    throw new Error(`GET ${path} failed: ${response.status}${detail}`);
   }
+
+  return response.json();
 }
+ 
+async function apiPost(path, body) {
+  const response = await fetch(`${API_BASE}${path}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
 
-// ✅ Guardar predicción
-async function savePrediction(prediction) {
-  try {
-    const item = {
-      id: `${prediction.player}-${prediction.team1}-${prediction.team2}`,
-      player: prediction.player,
-      team1: prediction.team1,
-      team2: prediction.team2,
-      pred1: Number(prediction.pred1),
-      pred2: Number(prediction.pred2)
-    };
+  if (!response.ok) {
+    let errorBody = {};
+    try {
+      errorBody = await response.json();
+    } catch {
+      // ignore
+    }
 
-    await predictionsContainer.items.upsert(item);
-  } catch (err) {
-    console.error(`❌ Error predicción ${prediction.player}:`, err.message);
+    const error = new Error(
+      errorBody.error ?? `POST ${path} failed: ${response.status}`
+    );
+    throw error;
   }
+
+  return response.json();
 }
 
-module.exports = {
-  saveMatch,
-  savePrediction
-};
+async function apiDelete(path) {
+  const response = await fetch(`${API_BASE}${path}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    let errorBody = {};
+    try {
+      errorBody = await response.json();
+    } catch {
+      // ignore
+    }
+
+    const error = new Error(
+      errorBody.error ?? `DELETE ${path} failed: ${response.status}`
+    );
+    throw error;
+  }
+
+  return response.json();
+}
+
+// =========================
+// PLAYERS
+// =========================
+export async function fetchPlayers() {
+  return apiGet('/players');
+}
+
+export async function createPlayerInCosmos(player) {
+  return apiPost('/players', player);
+}
+
+export async function deletePlayerInCosmos(playerId) {
+  return apiDelete(`/players/${playerId}`);
+}
+
+export async function claimPlayerInCosmos({
+  playerId,
+  claimCode,
+  uid,
+  force = false,
+}) {
+  return apiPost('/claim-player', {
+    playerId,
+    claimCode,
+    uid,
+    force,
+  });
+}
+
+// =========================
+// RESULTS
+// =========================
+export async function fetchResults() {
+  return apiGet('/results');
+}
+
+export async function saveResult(result) {
+  return apiPost('/results', result);
+}
+
+export async function deleteResult(matchId) {
+  return apiDelete(`/results/${matchId}`);
+}
+
+// =========================
+// PREDICTIONS
+// =========================
+export async function fetchPredictionsByPlayer(playerId) {
+  return apiGet(`/predictions/${playerId}`);
+}
+
+export async function fetchAllPredictions() {
+  return apiGet('/predictions-all');
+}
+
+export async function savePrediction(prediction) {
+  return apiPost('/predictions', prediction);
+}
+
+// =========================
+// MATCH OVERRIDES / CRUCES
+// =========================
+export async function fetchMatchOverrides() {
+  return apiGet('/matches-overrides');
+}
+
+export async function saveMatchTeams(matchId, teamA, teamB) {
+  return apiPost(`/matches/${matchId}/teams`, {
+    teamA,
+    teamB,
+  });
+}
+
+// =========================
+// RESET (si luego lo implementas en backend)
+// =========================
+export async function resetAllCosmosData() {
+  return apiDelete('/reset-all');
+}

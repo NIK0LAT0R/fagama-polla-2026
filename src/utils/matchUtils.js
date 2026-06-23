@@ -1,32 +1,54 @@
 /**
  * Returns true when the match kickoff time has passed (predictions locked).
  */
+/**
+ * Devuelve la fecha/hora de bloqueo real del partido:
+ * 2:00 AM hora de Colombia del mismo día del partido.
+ */
+export function getMatchLockTime(match) {
+  if (!match) return null;
 
+  const source = match.datetime ?? match.lockAt ?? match.date;
+  if (!source) return null;
 
+  const matchDate = new Date(source);
 
+  if (Number.isNaN(matchDate.getTime())) {
+    console.warn('⚠️ fecha inválida en match:', match);
+    return null;
+  }
 
+  // Construimos una fecha fija a las 2:00 AM Colombia (-05:00)
+  const year = matchDate.getFullYear();
+  const month = String(matchDate.getMonth() + 1).padStart(2, '0');
+  const day = String(matchDate.getDate()).padStart(2, '0');
+
+  return new Date(`${year}-${month}-${day}T02:00:00-05:00`);
+}
+
+/**
+ * Indica si el partido ya está bloqueado.
+ * Regla: bloqueado desde las 2:00 AM hora Colombia del día del partido.
+ */
 export function isMatchLocked(match) {
-  if (!match) return false;
+  const lockDate = getMatchLockTime(match);
 
-  const now = Date.now();
-
-  // Usa datetime si no hay lockAt
-  const lockSource = match.lockAt || match.datetime;
-
-  const lockTime = new Date(lockSource).getTime();
-
-  if (isNaN(lockTime)) {
-    console.warn("⚠️ fecha inválida en match:", match);
+  if (!lockDate || Number.isNaN(lockDate.getTime())) {
     return false;
   }
 
-  return lockTime <= now;
+  return Date.now() >= lockDate.getTime();
 }
 
-
-/** Format ISO datetime for display. */
+/**
+ * Fecha legible del partido para mostrar en UI.
+ */
 export function formatMatchDate(datetime) {
-  return new Date(datetime).toLocaleString(undefined, {
+  const date = new Date(datetime);
+
+  if (Number.isNaN(date.getTime())) return '';
+
+  return date.toLocaleString(undefined, {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
@@ -35,7 +57,9 @@ export function formatMatchDate(datetime) {
   });
 }
 
-/** Prediction map key for fast lookup. */
+/**
+ * Key para búsquedas rápidas en predictionMap.
+ */
 export function predictionKey(playerId, matchId) {
   return `${String(playerId)}-${String(matchId)}`;
 }

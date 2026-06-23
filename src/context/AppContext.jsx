@@ -1,4 +1,5 @@
 
+
 import {
   createContext,
   useCallback,
@@ -6,7 +7,9 @@ import {
   useEffect,
   useMemo,
   useState,
+  useRef,
 } from 'react';
+
 
 import { MATCHES } from '../data/matches.js';
 import { calculateStandings } from '../services/scoring.js';
@@ -29,6 +32,9 @@ import {
   fetchPredictionsByPlayer,
   savePrediction,
   saveResult,
+  deleteResult,
+  fetchMatchOverrides,
+  saveMatchTeams,
 } from '../services/cosmosApi.js';
 
 import {
@@ -52,6 +58,7 @@ export function AppProvider({ children }) {
   const [players, setPlayers] = useState([]);
   const [predictions, setPredictions] = useState([]); // solo del jugador activo
   const [results, setResults] = useState([]);
+  const [matchOverrides, setMatchOverrides] = useState([]);
 
   const [uid, setUid] = useState(null);
   const [authReady, setAuthReady] = useState(false);
@@ -59,10 +66,13 @@ export function AppProvider({ children }) {
   const [playersReady, setPlayersReady] = useState(false);
   const [resultsReady, setResultsReady] = useState(false);
   const [predictionsReady, setPredictionsReady] = useState(false);
+  const [matchOverridesReady, setMatchOverridesReady] = useState(false);
 
   const [claimedPlayerId, setClaimedPlayerId] = useState(null);
   const [activePlayerId, setActivePlayerId] = useState(loadActingPlayerId() || '');
   const [claimResolved, setClaimResolved] = useState(false);
+
+  const previousClaimedPlayerIdRef = useRef(null);
 
   // =========================
   // AUTH
@@ -157,6 +167,39 @@ export function AppProvider({ children }) {
     }
 
     loadResults();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [authReady]);
+
+  // =========================
+  // MATCH OVERRIDES
+  // =========================
+  useEffect(() => {
+    if (!authReady) return;
+
+    let cancelled = false;
+
+    async function loadMatchOverrides() {
+      setMatchOverridesReady(false);
+      try {
+        const nextOverrides = await fetchMatchOverrides();
+        if (!cancelled) {
+          setMatchOverrides(nextOverrides);
+          setMatchOverridesReady(true);
+          console.log('Cosmos match overrides loaded:', nextOverrides.length);
+        }
+      } catch (error) {
+        console.error('Error loading match overrides from Cosmos:', error);
+        if (!cancelled) {
+          setMatchOverrides([]);
+          setMatchOverridesReady(true);
+        }
+      }
+    }
+
+    loadMatchOverrides();
 
     return () => {
       cancelled = true;
@@ -261,7 +304,7 @@ export function AppProvider({ children }) {
       saveActingPlayerId(String(nextPlayerId));
       return true;
     },
-    [switchablePlayers],
+    [switchablePlayers]
   );
 
   const resolveClaim = useCallback((playerId) => {
@@ -318,12 +361,16 @@ export function AppProvider({ children }) {
     };
   }, [authReady, playersReady, claimResolved, activePlayerId]);
 
+  // =========================
+  // CLAIM STATUS
+  // =========================
   const claimStatus = useMemo(() => {
     if (
       !authReady ||
       !playersReady ||
       !resultsReady ||
       !predictionsReady ||
+      !matchOverridesReady ||
       !claimResolved
     ) {
       return 'loading';
@@ -336,12 +383,33 @@ export function AppProvider({ children }) {
     playersReady,
     resultsReady,
     predictionsReady,
+    matchOverridesReady,
     claimResolved,
     claimedPlayerId,
   ]);
 
   // =========================
-  // ADMIN ACTIONS (por ahora solo locales / placeholder)
+  // MATCHES MERGED
+  // =========================
+  const matches = useMemo(() => {
+    const overrideMap = new Map(
+      matchOverrides.map((item) => [String(item.id), item])
+    );
+
+    return MATCHES.map((baseMatch) => {
+      const override = overrideMap.get(String(baseMatch.id));
+
+      if (!override) return baseMatch;
+
+      return {
+        ...baseMatch,
+        ...override,
+      };
+    });
+  }, [matchOverrides]);
+
+  // =========================
+  // ADMIN ACTIONS (placeholder)
   // =========================
   const addPlayer = useCallback(
     async (name) => {
@@ -353,7 +421,6 @@ export function AppProvider({ children }) {
       );
       if (exists) return { success: false, reason: 'duplicate' };
 
-      // ⚠️ temporalmente no implementado en Cosmos backend
       const id = createId();
       const claimCode = generateClaimCode();
 
@@ -404,7 +471,6 @@ export function AppProvider({ children }) {
       try {
         await savePrediction(predictionPayload);
 
-        // recargar predicciones del jugador activo para refrescar UI
         const nextPredictions = await fetchPredictionsByPlayer(activePlayerId);
         setPredictions(nextPredictions);
       } catch (err) {
@@ -427,13 +493,26 @@ export function AppProvider({ children }) {
 
     await saveResult(resultPayload);
 
-    // recargar resultados
     const nextResults = await fetchResults();
     setResults(nextResults);
   }, []);
 
-  const clearResult = useCallback(async () => {
-    console.warn('clearResult aún no está conectado a Cosmos backend');
+  const clearResult = useCallback(async (matchId) => {
+    const safeMatchId = String(matchId);
+
+    await deleteResult(safeMatchId);
+
+    const nextResults = await fetchResults();
+    setResults(nextResults);
+  }, []);
+
+  const upsertMatchTeams = useCallback(async (matchId, teamA, teamB) => {
+    const safeMatchId = String(matchId);
+
+    await saveMatchTeams(safeMatchId, teamA, teamB);
+
+    const nextOverrides = await fetchMatchOverrides();
+    setMatchOverrides(nextOverrides);
   }, []);
 
   const handleResetAll = useCallback(async () => {
@@ -489,7 +568,7 @@ export function AppProvider({ children }) {
       players,
       predictions,
       results,
-      matches: MATCHES,
+      matches,
 
       uid,
       authReady,
@@ -515,12 +594,14 @@ export function AppProvider({ children }) {
       upsertPrediction,
       upsertResult,
       clearResult,
+      upsertMatchTeams,
       resetAllData: handleResetAll,
     }),
     [
       players,
       predictions,
       results,
+      matches,
       uid,
       authReady,
       claimStatus,
@@ -539,6 +620,7 @@ export function AppProvider({ children }) {
       upsertPrediction,
       upsertResult,
       clearResult,
+      upsertMatchTeams,
       handleResetAll,
     ]
   );

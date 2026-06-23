@@ -1,6 +1,10 @@
 import { memo, useEffect, useState } from 'react';
 import { calculateMatchPoints } from '../../services/scoring.js';
-import { formatMatchDate, isMatchLocked } from '../../utils/matchUtils.js';
+import {
+  formatMatchDate,
+  isMatchLocked,
+  getMatchLockTime,
+} from '../../utils/matchUtils.js';
 import { formatCountdown } from '../../utils/countdown.js';
 import { getTeamFlagSrc } from '../../utils/flags.js';
 
@@ -9,7 +13,11 @@ function TeamFlag({ teamName }) {
   const src = getTeamFlagSrc(teamName);
 
   if (!src || failed) {
-    return <span className="team-flag team-flag-fallback" aria-hidden="true">🏳️</span>;
+    return (
+      <span className="team-flag team-flag-fallback" aria-hidden="true">
+        🏳️
+      </span>
+    );
   }
 
   return (
@@ -45,26 +53,36 @@ function MatchRow({
   playerId,
   onDraftChange,
 }) {
-  /* Desbloquear predicciones para testing, pero la idea es usar isMatchLocked(match) para esto
-  const locked = false;*/
-  //const locked = isMatchLocked(match);
   const locked = isMatchLocked(match);
-  const [countdown, setCountdown] = useState(() => formatCountdown(match.lockAt));
+
+  const [countdown, setCountdown] = useState(() =>
+    formatCountdown(getMatchLockTime(match))
+  );
 
   useEffect(() => {
-    setCountdown(formatCountdown(match.lockAt));
-    const interval = setInterval(() => {
-      setCountdown(formatCountdown(match.lockAt));
-    }, 60000); // Update every minute
-    return () => clearInterval(interval);
-  }, [match.lockAt]);
+    const lockTime = getMatchLockTime(match);
 
-  const currentA = prediction?.predictedA != null ? String(prediction.predictedA) : '';
-  const currentB = prediction?.predictedB != null ? String(prediction.predictedB) : '';
+    setCountdown(formatCountdown(lockTime));
+
+    const interval = setInterval(() => {
+      setCountdown(formatCountdown(lockTime));
+    }, 60000); // update every minute
+
+    return () => clearInterval(interval);
+  }, [match]);
+
+  const currentA =
+    prediction?.predictedA != null ? String(prediction.predictedA) : '';
+
+  const currentB =
+    prediction?.predictedB != null ? String(prediction.predictedB) : '';
+
   const draftA = draft?.predictedA != null ? draft.predictedA : currentA;
   const draftB = draft?.predictedB != null ? draft.predictedB : currentB;
 
-  const points = prediction && result ? calculateMatchPoints(prediction, result) : null;
+  const points =
+    prediction && result ? calculateMatchPoints(prediction, result) : null;
+
   const disabled = !playerId || locked;
 
   function sanitizeScore(value) {
@@ -82,10 +100,12 @@ function MatchRow({
   }
 
   function getCountdownTone(match) {
-    if (!match?.lockAt) return 'countdown-safe';
+    const lockDate = getMatchLockTime(match);
+
+    if (!lockDate) return 'countdown-safe';
 
     const now = Date.now();
-    const lockTime = new Date(match.lockAt).getTime();
+    const lockTime = lockDate.getTime();
     const diffMs = lockTime - now;
 
     if (diffMs <= 0) {
@@ -106,18 +126,18 @@ function MatchRow({
     return 'countdown-safe';
   }
 
-
-
   return (
     <article className={`match-row ${locked ? 'locked' : ''}`}>
       <div className="match-meta">
         <span className="match-stage">{match.stage}</span>
-        <time dateTime={match.datetime}>{formatMatchDate(match.datetime)}</time>        
+        <time dateTime={match.datetime}>{formatMatchDate(match.datetime)}</time>
+
         {countdown && !locked && (
           <span className={`countdown-text ${getCountdownTone(match)}`}>
             Este marcador se bloqueará en: ⏱ {countdown}
           </span>
         )}
+
         {locked && <span className="lock-badge">Predicción bloqueada</span>}
       </div>
 
@@ -158,7 +178,8 @@ function MatchRow({
           <span className="result-display">
             Resultado oficial:
             <strong>
-              <TeamFlag teamName={match.teamA} /> {result.scoreA} – {result.scoreB} <TeamFlag teamName={match.teamB} />
+              <TeamFlag teamName={match.teamA} /> {result.scoreA} – {result.scoreB}{' '}
+              <TeamFlag teamName={match.teamB} />
             </strong>
             {points !== null && (
               <span className={`points-chip points-${points}`}>+{points} pts</span>
