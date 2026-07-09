@@ -557,11 +557,21 @@ export function AppProvider({ children }) {
     return map;
   }, [results]);
 
+  
   const standings = useMemo(() => {
-    return calculateStandings(players, predictions, results).sort(
+    return calculateStandings(
+      players,
+      predictions,
+      results,
+      matches
+    ).sort(
       (a, b) => b.totalPoints - a.totalPoints || a.name.localeCompare(b.name)
     );
-  }, [players, predictions, results]);
+  }, [players, predictions, results, matches]);
+
+
+
+
 
   const value = useMemo(
     () => ({

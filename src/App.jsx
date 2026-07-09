@@ -356,7 +356,7 @@ export default function App() {
       </main>
 
       <footer className="app-footer">
-        <p>Datos sincronizados en tiempo real con Firebase.</p>
+        <p>Datos sincronizados en tiempo real.</p>
       </footer>
     </div>
   );

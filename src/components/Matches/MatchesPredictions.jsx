@@ -338,6 +338,7 @@ export default function MatchesPredictions({ onDirtyChange }) {
               };
             }
 
+            
             const normalizedPrediction = {
               predictedA:
                 matchPrediction.predictedA ?? matchPrediction.scoreA ?? 0,
@@ -345,7 +346,13 @@ export default function MatchesPredictions({ onDirtyChange }) {
                 matchPrediction.predictedB ?? matchPrediction.scoreB ?? 0,
             };
 
-            const points = calculateMatchPoints(normalizedPrediction, result);
+            const points = calculateMatchPoints(
+              normalizedPrediction,
+              result,
+              match
+            );
+
+
 
             return {
               playerId: player.id,

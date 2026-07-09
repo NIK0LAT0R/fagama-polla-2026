@@ -498,7 +498,7 @@ export default function PlayerManagement({
       const prediction = viewerPredictionMap.get(String(match.id));
       const result = resultMap.get(String(match.id));
       const points =
-        prediction && result ? calculateMatchPoints(prediction, result) : null;
+        prediction && result ? calculateMatchPoints(prediction, result, match) : null;
 
       return { match, prediction, result, points };
     });

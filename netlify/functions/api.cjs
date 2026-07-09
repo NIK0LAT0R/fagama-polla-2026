@@ -263,6 +263,27 @@ exports.handler = async (event) => {
     }
 
     // =========================
+    // GET /backup
+    // =========================
+    if (method === 'GET' && path === '/backup') {
+      const containers = ['players', 'predictions', 'results', 'matches'];
+
+      const backup = {};
+
+      for (const containerName of containers) {
+        const { resources } = await database
+          .container(containerName)
+          .items.readAll()
+          .fetchAll();
+
+        backup[containerName] = resources;
+      }
+
+      return response(200, backup);
+    }
+
+
+    // =========================
     // GET /health
     // =========================
     if (method === 'GET' && path === '/health') {
@@ -293,3 +314,5 @@ exports.handler = async (event) => {
     });
   }
 };
+
+

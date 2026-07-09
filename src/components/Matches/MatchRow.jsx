@@ -53,7 +53,11 @@ function MatchRow({
   playerId,
   onDraftChange,
 }) {
-  const locked = isMatchLocked(match);
+
+
+  // Determinamos bloqueos en predicciones con: const locked = isMatchLocked(match);
+  //Para desbloquearlos, reemplazar con: const locked = false;
+  const locked = isMatchLocked(match); //isMatchLocked(match);
 
   const [countdown, setCountdown] = useState(() =>
     formatCountdown(getMatchLockTime(match))
@@ -81,7 +85,7 @@ function MatchRow({
   const draftB = draft?.predictedB != null ? draft.predictedB : currentB;
 
   const points =
-    prediction && result ? calculateMatchPoints(prediction, result) : null;
+    prediction && result ? calculateMatchPoints(prediction, result, match) : null;
 
   const disabled = !playerId || locked;
 

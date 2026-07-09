@@ -724,14 +724,19 @@ body {
   font-size: 0.75rem;
 }
 
-.points-3 {
+.points-6 {
   background: rgba(255, 213, 79, 0.2);
   color: var(--color-gold);
 }
 
-.points-1 {
+.points-8 {
   background: rgba(0, 200, 83, 0.15);
   color: var(--color-primary);
+}
+
+.points-10 {
+  background: rgba(0, 200, 83, 0.15);
+  color: var(--color-gold);
 }
 
 .points-0 {

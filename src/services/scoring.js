@@ -18,6 +18,19 @@
  * - 'B' = gana equipo B
  * - 'draw' = empate
  */
+
+
+
+
+const DOUBLE_POINT_STAGES = [
+  'Cuartos de final',
+  'Semifinal',
+  'Tercer puesto',
+  'Final',
+];
+
+
+
 function getOutcome(scoreA, scoreB) {
   if (scoreA > scoreB) return 'A';
   if (scoreB > scoreA) return 'B';
@@ -35,7 +48,14 @@ function toSafeNumber(value) {
 /**
  * Calcula los puntos de una predicción frente al resultado real.
  */
-export function calculateMatchPoints(prediction, result) {
+
+
+export function calculateMatchPoints(
+  prediction,
+  result,
+  match = null
+) {
+
   if (!prediction || !result) return null;
 
   const predictedA = toSafeNumber(prediction.predictedA ?? prediction.scoreA);
@@ -43,43 +63,49 @@ export function calculateMatchPoints(prediction, result) {
   const scoreA = toSafeNumber(result.scoreA);
   const scoreB = toSafeNumber(result.scoreB);
 
-  if (
-    predictedA === null ||
-    predictedB === null ||
-    scoreA === null ||
-    scoreB === null
-  ) {
-    return 0;
-  }
-
-  // Marcador exacto = 5 puntos totales
-  if (predictedA === scoreA && predictedB === scoreB) {
-    return 5;
-  }
 
   let points = 0;
 
-  // 3 puntos si acierta ganador o empate
-  if (getOutcome(predictedA, predictedB) === getOutcome(scoreA, scoreB)) {
-    points += 3;
+  if (predictedA === scoreA && predictedB === scoreB) {
+    points = 5;
+  } else {
+    if (
+      getOutcome(predictedA, predictedB) ===
+      getOutcome(scoreA, scoreB)
+    ) {
+      points += 3;
+    }
+
+    if (predictedA === scoreA) {
+      points += 1;
+    }
+
+    if (predictedB === scoreB) {
+      points += 1;
+    }
   }
 
-  // 1 punto por cada equipo con goles exactos
-  if (predictedA === scoreA) {
-    points += 1;
-  }
-
-  if (predictedB === scoreB) {
-    points += 1;
+  if (
+    match &&
+    DOUBLE_POINT_STAGES.includes(match.stage)
+  ) {
+    points *= 2;
   }
 
   return points;
+
 }
 
 /**
  * Construye la tabla general de posiciones.
  */
-export function calculateStandings(players, predictions, results) {
+
+export function calculateStandings(
+  players,
+  predictions,
+  results,
+  matches
+) {
   const safePlayers = Array.isArray(players) ? players : [];
   const safePredictions = Array.isArray(predictions) ? predictions : [];
   const safeResults = Array.isArray(results) ? results : [];
@@ -93,6 +119,11 @@ export function calculateStandings(players, predictions, results) {
   const resultMap = new Map(
     safeResults.map((r) => [String(r.matchId), r])
   );
+  
+  const matchMap = new Map(
+    (matches || []).map((m) => [String(m.id), m])
+  );
+
 
   console.log(
     'calculateStandings: players',
@@ -117,7 +148,40 @@ export function calculateStandings(players, predictions, results) {
       const result = resultMap.get(String(prediction.matchId));
       if (!result) continue;
 
-      const points = calculateMatchPoints(prediction, result);
+      
+    const match = matchMap.get(String(prediction.matchId));
+    
+    console.log(
+      'DEBUG MATCH',
+      prediction.matchId,
+      match?.stage
+    );
+
+
+    let points = calculateMatchPoints(
+      prediction,
+      result
+    );
+
+
+
+    
+    console.log(
+      'DEBUG POINTS BEFORE',
+      points
+    );
+
+
+    
+    if (
+      match &&
+      DOUBLE_POINT_STAGES.includes(match.stage)
+    ) {
+      console.log('DOUBLE POINTS APPLIED');
+      points *= 2;
+    }
+
+
 
       if (points !== null) {
         totalPoints += points;

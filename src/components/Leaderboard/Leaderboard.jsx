@@ -100,7 +100,7 @@ export default function Leaderboard({ onInspectPlayer }) {
   }, []);
 
   const standings = useMemo(() => {
-    const baseStandings = calculateStandings(players, allPredictions, results).map((entry) => {
+    const baseStandings = calculateStandings(players, allPredictions, results, matches).map((entry) => {
       const matchedPlayer =
         players.find((p) => String(p.id) === String(entry.playerId)) ||
         players.find((p) => p.name === entry.name);
@@ -130,7 +130,7 @@ export default function Leaderboard({ onInspectPlayer }) {
       const matchDate = match.lockAt ?? match.datetime;
       if (!isSameLocalDay(matchDate, today)) return;
 
-      const points = calculateMatchPoints(prediction, result);
+      const points = calculateMatchPoints(prediction, result, match);
       playerEntry.dailyPoints += points;
     });
 
@@ -150,8 +150,8 @@ export default function Leaderboard({ onInspectPlayer }) {
         <div>
           <h2>Consolidado de puntos</h2>
           <p className="panel-subtitle">
-            Ganador o empate correcto: 3 pts · Goles exactos por equipo: 1 pt c/u ·
-            Marcador exacto: 5 pts
+            Ganador o empate correcto: 6 pts · Goles exactos por equipo: 2 pt c/u ·
+            Marcador exacto: 10 pts
           </p>
         </div>
 
