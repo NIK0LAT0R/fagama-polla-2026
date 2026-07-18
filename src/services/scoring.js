@@ -22,12 +22,16 @@
 
 
 
-const DOUBLE_POINT_STAGES = [
-  'Cuartos de final',
-  'Semifinal',
-  'Tercer puesto',
-  'Final',
-];
+
+
+
+
+const STAGE_MULTIPLIERS = {
+  'Cuartos de final': 2,
+  Semifinal: 2,
+  'Tercer puesto': 4,
+  Final: 4,
+};
 
 
 
@@ -85,12 +89,14 @@ export function calculateMatchPoints(
     }
   }
 
-  if (
-    match &&
-    DOUBLE_POINT_STAGES.includes(match.stage)
-  ) {
-    points *= 2;
-  }
+  
+  const multiplier =
+    match?.stage
+      ? STAGE_MULTIPLIERS[match.stage] ?? 1
+      : 1;
+
+  points *= multiplier;
+
 
   return points;
 
@@ -160,7 +166,8 @@ export function calculateStandings(
 
     let points = calculateMatchPoints(
       prediction,
-      result
+      result,
+      match
     );
 
 
@@ -173,13 +180,6 @@ export function calculateStandings(
 
 
     
-    if (
-      match &&
-      DOUBLE_POINT_STAGES.includes(match.stage)
-    ) {
-      console.log('DOUBLE POINTS APPLIED');
-      points *= 2;
-    }
 
 
 

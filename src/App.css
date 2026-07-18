@@ -739,6 +739,23 @@ body {
   color: var(--color-gold);
 }
 
+.points-12 {
+  background: rgba(197, 87, 240, 0.15);
+  color: var(--color-primary);
+}
+
+
+.points-16 {
+  background: rgba(240, 207, 99, 0.2);
+  color: var(--color-primary);
+}
+
+.points-20 {
+  background: rgba(0, 200, 83, 0.15);
+  color: var(--color-gold);
+}
+
+
 .points-0 {
   background: rgba(239, 83, 80, 0.15);
   color: var(--color-danger);

@@ -150,8 +150,8 @@ export default function Leaderboard({ onInspectPlayer }) {
         <div>
           <h2>Consolidado de puntos</h2>
           <p className="panel-subtitle">
-            Ganador o empate correcto: 6 pts · Goles exactos por equipo: 2 pt c/u ·
-            Marcador exacto: 10 pts
+            Ganador o empate correcto: 12 pts · Goles exactos por equipo: 4 pt c/u ·
+            Marcador exacto: 20 pts
           </p>
         </div>
 
